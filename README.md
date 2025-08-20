@@ -56,7 +56,7 @@ Open your terminal and follow these three simple steps:
 **1. Download the Installer Script:**
 
 ```bash
-curl -O https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh
+curl -L https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh | bash
 ```
 
 **2. Make the Script Executable:**
