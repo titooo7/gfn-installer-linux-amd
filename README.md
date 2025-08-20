@@ -10,8 +10,9 @@ This script automates the entire process of installing GeForce NOW and applies t
 
 ## Why Should I Use This Installer? 🤔
 
-  * **Unofficial but it works:** As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**, which can prevent it from running correctly on other desktop Linux systems.
-This installer gets around that limitation. It installs the official GeForce NOW application via Flatpak and then creates a special launch script with the necessary tweaks and parameters needed to overcome the standard restrictions. 
+  * **Unofficial but it works:** 
+As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**.
+This custom script allows you to installs the official GeForce NOW application via Flatpak, and then creates a special launch script with the necessary tweaks to overcome the standard installation restrictions on other devices running Linux. 
   * **Upto 4k 60FPS:** If you have GeForce NOW Ultimate subscription and you want to play upto 4K 60FPS on your AMD Linux computer (depending on your hardware you might not be able to do more than 1440p or 1080p)
   * **It's safe:** We aren't installing anything that the official application wouldn't install. The only addition is this lightweight launcher script that makes it all work seamlessly on your system.
 
@@ -111,7 +112,7 @@ rm -r /home//YOUR-USERNAME-HERE/.local/bin/geforce-now-launcher.sh
 
 ## Credits
 
-I was able to pull this together thanks to the information shared by several users in this thread https://gist.github.com/Mihitoko/bd76340e56e78ec972c8a1365abb0d55#file-install-geforcenow-on-desktop-linux-md
+I was able to create this thanks to the information shared by several users in this thread https://gist.github.com/Mihitoko/bd76340e56e78ec972c8a1365abb0d55#file-install-geforcenow-on-desktop-linux-md
 If if wasn't thanks to several users there I wouldn't have been able to create this installer.
 
 -----
