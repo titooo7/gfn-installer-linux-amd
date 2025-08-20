@@ -87,9 +87,9 @@ echo "6. Locating and modifying the main application menu shortcut..."
 # Wait for the main .desktop file to be created by Flatpak (up to 30 seconds)
 COUNTER=0
 while [ ! -f "$MENU_FILE_PATH" ]; do
-    sleep 2
+    sleep 3
     COUNTER=$((COUNTER+2))
-    if [ "$COUNTER" -ge 30 ]; then
+    if [ "$COUNTER" -ge 3 ]; then
         echo "❌ ERROR: Main application file was not found at '$MENU_FILE_PATH' after 30 seconds."
         echo "   Installation cannot continue. Please check your Flatpak setup."
         exit 1
