@@ -10,7 +10,8 @@ This script automates the entire process of installing GeForce NOW and applies t
 
 ## Why Should I Use This Installer? 🤔
 
-* **Run GeForce NOW on Unsupported Systems:** As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**. This script installs the official application and creates a custom launcher with the necessary tweaks to overcome the standard restrictions on other Linux devices.
+* **Run GeForce NOW on Linux computers not officially supported yet:** 
+As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**. This script installs the official application and creates a custom launcher with the necessary tweaks to overcome the standard restrictions on other Linux devices.
 
 * **Unlock Higher Resolutions:** This script enables resolutions up to **4K 60FPS** for GeForce NOW Ultimate subscribers, allowing you to get the most out of your high-end AMD hardware. (Actual performance will depend on your specific PC.)
 
