@@ -1,9 +1,6 @@
-# gfn-installer-linux-amd
-GeForce NOW Unofficial installer for AMD PC's running Linux distros 
-
 -----
 
-# GeForce NOW Installer for AMD Linux 🚀
+# GeForce NOW Unofficial Installer for AMD PC's running Linux 🚀
 
 A simple, one-step installer script to get NVIDIA GeForce NOW running perfectly on Arch-based Linux distributions with AMD hardware.
 
