@@ -10,12 +10,11 @@ This script automates the entire process of installing GeForce NOW and applies t
 
 ## Why Should I Use This Installer? 🤔
 
-  * **Unofficial but it works:** 
-As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**.
-This custom script allows you to installs the official GeForce NOW application via Flatpak, and then creates a special launch script with the necessary tweaks to overcome the standard installation restrictions on other devices running Linux. 
-  * **Upto 4k 60FPS:** If you have GeForce NOW Ultimate subscription and you want to play upto 4K 60FPS on your AMD Linux computer (depending on your hardware you might not be able to do more than 1440p or 1080p)
-  * **It's safe:** We aren't installing anything that the official application wouldn't install. The only addition is this lightweight launcher script that makes it all work seamlessly on your system.
+* **Run GeForce NOW on Unsupported Systems:** As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**. This script installs the official application and creates a custom launcher with the necessary tweaks to overcome the standard restrictions on other Linux devices.
 
+* **Unlock Higher Resolutions:** This script enables resolutions up to **4K 60FPS** for GeForce NOW Ultimate subscribers, allowing you to get the most out of your high-end AMD hardware. (Actual performance will depend on your specific PC.)
+
+* **Safe and Minimal:** We aren't installing anything that the official application wouldn't. The only addition is a lightweight launcher script that makes it all work seamlessly.
 -----
 
 ## Features ✨
@@ -69,7 +68,7 @@ Open your terminal and follow these three simple steps:
 **1. Download the Installer Script:**
 
 ```bash
-curl -L https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh | bash
+url -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh
 ```
 
 **2. Make the Script Executable:**
@@ -88,7 +87,7 @@ The script will handle the rest. Once it finishes, you can launch GeForce NOW fr
 
 -----
 
-## 🛑 I want to uninstall it
+## 🛑 If you want to uninstall it
 
 Open your terminal and run the following commands:
 
@@ -97,15 +96,15 @@ flatpak uninstall --delete-data com.nvidia.geforcenow
 ```
 
 ```bash
-rm -r "/home/YOUR-USERNAME-HERE/.local/share/applications/NVIDIA GeForce NOW"
+rm -f "$HOME/.local/bin/geforce-now-launcher.sh"
 ```
 
 ```bash
-rm -r "/home//YOUR-USERNAME-HERE/.local/share/applications/NVIDIA GeForce NOW"
+rm -f "$HOME/.local/share/applications/com.nvidia.geforcenow.desktop"
 ```
 
 ```bash
-rm -r /home//YOUR-USERNAME-HERE/.local/bin/geforce-now-launcher.sh
+rm -f "$HOME/Desktop/com.nvidia.geforcenow.desktop"
 ```
 
 -----
