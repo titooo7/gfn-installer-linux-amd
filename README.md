@@ -10,11 +10,10 @@ This script automates the entire process of installing GeForce NOW and applies t
 
 ## Why Should I Use This Installer? 🤔
 
-As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**, which can prevent it from running correctly on other desktop Linux systems.
-
-This installer gets around that limitation. It installs the official GeForce NOW application via Flatpak and then creates a special launch script with the necessary tweaks and parameters needed to overcome the standard restrictions. **We aren't installing anything that the official application wouldn't install**; the only addition is this lightweight launcher that makes it all work seamlessly on your system.
-
-You should also use installer if you have GeForce NOW Ultimate subscription and you want to play upto 4K 60FPS on your AMD Linux computer (depending on your hardware you might not be able to do more than 1440p or 1080p)
+  * **Unofficial but it works:** As of August 2025, NVIDIA officially supports GeForce NOW on Linux **only for the Steam Deck**, which can prevent it from running correctly on other desktop Linux systems.
+This installer gets around that limitation. It installs the official GeForce NOW application via Flatpak and then creates a special launch script with the necessary tweaks and parameters needed to overcome the standard restrictions. 
+  * **Upto 4k 60FPS:** If you have GeForce NOW Ultimate subscription and you want to play upto 4K 60FPS on your AMD Linux computer (depending on your hardware you might not be able to do more than 1440p or 1080p)
+  * **It's safe:** We aren't installing anything that the official application wouldn't install. The only addition is this lightweight launcher script that makes it all work seamlessly on your system.
 
 -----
 
@@ -24,7 +23,7 @@ You should also use installer if you have GeForce NOW Ultimate subscription and 
   * **Custom Launcher:** Creates a special launcher with the required tweaks to run GeForce NOW on unsupported systems.
   * **Error Fixes:** Automatically applies configurations to prevent common connection and launch issues.
   * **Universal Shortcut Creation:** Modifies both the **Application Menu** entry and the **Desktop** shortcut to use the custom launcher.
-  * **Adaptive Configuration:** Intelligently detects your desktop environment (GNOME/Cinnamon vs. KDE/Other) to make shortcuts launchable correctly.
+  * **Adaptive Configuration:** It detects your desktop environment (GNOME/Cinnamon vs. KDE/Other) to make shortcuts launchable correctly.
 
 -----
 
@@ -46,6 +45,19 @@ This script was successfully tested on a **Chuwi AuBox Mini-PC** with the follow
   * **GPU:** AMD Radeon 780M
 
 I'm now able to play at 4K 60FPS when my MiniPC is connected to my 4K TV.
+
+-----
+
+
+## How It Works ⚙️
+
+The script performs the following actions:
+
+1.  **Installs GeForce NOW:** It uses Flatpak to install the official GeForce NOW application along with its required runtimes.
+2.  **Applies Overrides:** It configures the Flatpak sandbox with necessary permissions.
+3.  **Creates a Custom Launcher:** A new bash script (`geforce-now-launcher.sh`) is created in `$HOME/.local/bin/`. This launcher applies specific configurations and parameters before starting the app.
+4.  **Modifies Shortcuts:** The script finds the `.desktop` files for both the application menu and the desktop icon and changes their `Exec` command to point to our new custom launcher.
+5.  **Makes Shortcuts Launchable:** It detects your desktop environment and uses the appropriate command (`gio set` for GNOME/Cinnamon or `chmod +x` for KDE/XFCE) to ensure the icons are immediately clickable.
 
 -----
 
@@ -75,15 +87,25 @@ The script will handle the rest. Once it finishes, you can launch GeForce NOW fr
 
 -----
 
-## How It Works ⚙️
+## 🛑 I want to uninstall it
 
-The script performs the following actions:
+Open your terminal and run the following commands:
 
-1.  **Installs GeForce NOW:** It uses Flatpak to install the official GeForce NOW application along with its required runtimes.
-2.  **Applies Overrides:** It configures the Flatpak sandbox with necessary permissions.
-3.  **Creates a Custom Launcher:** A new bash script (`geforce-now-launcher.sh`) is created in `$HOME/.local/bin/`. This launcher applies specific configurations and parameters before starting the app.
-4.  **Modifies Shortcuts:** The script finds the `.desktop` files for both the application menu and the desktop icon and changes their `Exec` command to point to our new custom launcher.
-5.  **Makes Shortcuts Launchable:** It detects your desktop environment and uses the appropriate command (`gio set` for GNOME/Cinnamon or `chmod +x` for KDE/XFCE) to ensure the icons are immediately clickable.
+```bash
+flatpak uninstall --delete-data com.nvidia.geforcenow
+```
+
+```bash
+rm -r "/home/YOUR-USERNAME-HERE/.local/share/applications/NVIDIA GeForce NOW"
+```
+
+```bash
+rm -r "/home//YOUR-USERNAME-HERE/.local/share/applications/NVIDIA GeForce NOW"
+```
+
+```bash
+rm -r /home//YOUR-USERNAME-HERE/.local/bin/geforce-now-launcher.sh
+```
 
 -----
 
@@ -96,5 +118,5 @@ If if wasn't thanks to several users there I wouldn't have been able to create t
 
 ## Disclaimer
 
-This is an unofficial script and is not affiliated with NVIDIA. It is provided as-is in the hope that it will be useful.
-Please DO NOT contact Nvidia to report bugs that related to the use of GeForce NOW if you installed the app on Linux using custom installers like this one.
+This is an Unofficial installation script and it's not affiliated with NVIDIA. It is provided as-is in the hope that it will be useful for other users of Arch based linux distros.
+Please DO NOT contact Nvidia to report bugs  related to the use of GeForce NOW if you installed the app on Linux using custom installers like this one.
