@@ -68,7 +68,7 @@ The script performs the following actions:
 **Option 1. You can install it with one single command without saving the script on your disk::**
 
 ```bash
-curl -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh | bash
+curl -L https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh | bash
 ```
 
 **Option 2. Download the Installer Script, Make it Executable and Run it:**
