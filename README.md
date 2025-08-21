@@ -10,7 +10,7 @@ This script automates the installation and applies the necessary configurations 
 
 ## Overview
 
-  * **Enables GeForce NOW on Unsupported Systems:** NVIDIA's official support for Linux is currently limited to ChromeOS and the Steam Deck. This script installs the official GeForce NOW application and creates a custom launcher with the required arguments to bypass these restrictions.
+  * **Enables GeForce NOW on Unsupported Systems:** NVIDIA’s official Linux support is currently limited to ChromeOS and the Steam Deck. This script installs the official Steam Deck application of GeForce NOW and creates a custom launcher with the required arguments to bypass these restrictions.
 
   * **Supports High-Resolution Streaming:** Enables GeForce NOW Ultimate subscribers to stream at 1440p 120FPS and up to 4K 60FPS, provided their AMD GPU and display are capable.
 
