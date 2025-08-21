@@ -64,21 +64,22 @@ The script performs the following actions:
 
 ## 🛠️ Installation & Usage
 
-Open your terminal and follow these three simple steps:
 
-**1. Download the Installer Script:**
+**Option 1. You can install it with one single command without saving the script on your disk::**
 
 ```bash
-url -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh
+curl -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh | bash
 ```
 
-**2. Make the Script Executable:**
+**Option 2. Download the Installer Script, Make it Executable and Run it:**
+
+```bash
+curl -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh
+```
 
 ```bash
 chmod +x install-gfn.sh
 ```
-
-**3. Run the Script:**
 
 ```bash
 ./install-gfn.sh
