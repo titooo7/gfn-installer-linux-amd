@@ -129,4 +129,4 @@ case "$XDG_CURRENT_DESKTOP" in
 esac
 echo "✅ Both shortcuts are now ready to launch."
 echo ""
-echo "🎉 Installation complete! You can now launch GeForce NOW from your desktop OR your application menu."
+echo "🎉 Installation complete! You can now launch MATE or XCFE and from there launch GeForce NOW from your desktop OR your application menu."
