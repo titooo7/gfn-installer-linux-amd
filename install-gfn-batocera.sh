@@ -28,7 +28,7 @@ flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//2
 flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
 
 echo "2. Adding the GeForce NOW Flatpak repository..."
-flatpak remote-add --user GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
+flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
 
 echo "3. Installing GeForce NOW..."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
@@ -106,6 +106,8 @@ EOF
 echo "✅ Main menu shortcut modified to use the custom launcher."
 
 echo "7. Creating/Updating the desktop shortcut..."
+# Creating the Desktop folder in case it doesn't exist yet
+mkdir "$USER_HOME/Desktop"
 # Copy the already modified file to the desktop, ensuring consistency
 cp "$MENU_FILE_PATH" "$DESKTOP_FILE_PATH"
 echo "✅ Desktop shortcut created and synchronized with the main menu entry."
@@ -116,7 +118,7 @@ echo "8. Making shortcuts launchable..."
 case "$XDG_CURRENT_DESKTOP" in
     # For GNOME, Cinnamon, MATE, etc., we use the 'gio' command.
     *GNOME*|*Cinnamon*|*MATE*|*Budgie*)
-        echo "   Detected a GNOME-based desktop. Using 'gio' to trust files."
+        echo "✅ Detected a GNOME-based desktop. Using 'gio' to trust files."
         /usr/bin/gio set "$MENU_FILE_PATH" metadata::trusted true || echo "⚠️  Warning: Could not trust the main menu shortcut."
         /usr/bin/gio set "$DESKTOP_FILE_PATH" metadata::trusted true || echo "⚠️  Warning: Could not trust the desktop shortcut."
         ;;
