@@ -19,7 +19,8 @@ DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
 # --- Installation Steps ---
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
 
-echo "1. Installing required Flatpak runtimes..."
+echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 # Added '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
 flatpak install -y --system flathub org.freedesktop.Platform//24.08 || true
 flatpak install -y --system flathub org.freedesktop.Sdk//24.08 || true
