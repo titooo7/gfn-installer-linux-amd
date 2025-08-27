@@ -33,7 +33,7 @@ flatpak remote-add --user --if-not-exists GeForceNOW https://international.downl
 echo "3. Installing GeForce NOW..."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
-# echo "4. Applying required Flatpak overrides..."
+echo "4. Applying required Flatpak overrides. Not required in Batocera as we do it later..."
 # flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 # flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 
