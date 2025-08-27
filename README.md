@@ -61,7 +61,7 @@ The installer performs the following steps:
 
 -----
 
-## Installation
+## Installation for CachyOS
 
 ### Option 1: Execute Directly
 
@@ -82,7 +82,15 @@ chmod +x install-gfn.sh
 After the script completes, launch GeForce NOW from your application menu or desktop shortcut.
 
 -----
+## Installation for CachyOS
+### Option: Execute Directly
 
+This command downloads and executes the script without saving it locally.
+
+```bash
+curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/gfn-installer-for-batocera-via-batoceras-mate.sh
+ | bash
+```
 ## Uninstallation
 
 To remove the application and all related files created by this script, execute the following commands in your terminal:
