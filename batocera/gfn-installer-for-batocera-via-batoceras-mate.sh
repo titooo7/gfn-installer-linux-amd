@@ -1,10 +1,14 @@
 #!/bin/bash
+# Define the URL and the destination path
+DOWNLOAD_URL="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/refs/heads/main/batocera/install-gfn-batocera.sh"
+SCRIPT_TO_RUN="/userdata/system/install-gfn-batocera.sh"
+
 # Download the latest version of the installation script
 echo "Downloading the latest installer script..."
-curl -L -o "install-gfn-batocera.sh" "https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/refs/heads/main/batocera/install-gfn-batocera.sh"
+curl -L -o "$SCRIPT_TO_RUN" "$DOWNLOAD_URL"
 
 # Make the downloaded script executable
-chmod +x "/userdata/system/install-gfn-batocera.sh
+chmod +x "$SCRIPT_TO_RUN"
 
 
 # Define the path to conty
