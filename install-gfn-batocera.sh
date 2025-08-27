@@ -49,6 +49,10 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 # This script runs GeForce NOW with SteamOS /etc/os-release information
 # and provides the necessary SSL certificates to prevent network errors.
 
+# Creating the required flatpak overrides before launching the app. Otherwise the app won't launch on Batocera mate or xcfe so in reality overrides of step 4 can be deleted as that works in CachyOS but not batocera
+flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+
 # Run the flatpak command with the required setup
 flatpak run --user --command=bash com.nvidia.geforcenow -c '
     # Exit immediately if a command exits with a non-zero status.
