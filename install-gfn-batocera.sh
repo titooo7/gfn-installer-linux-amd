@@ -106,8 +106,6 @@ EOF
 echo "✅ Main menu shortcut modified to use the custom launcher."
 
 echo "7. Creating/Updating the desktop shortcut..."
-# Creating the Desktop folder in case it doesn't exist yet
-mkdir "$USER_HOME/Desktop"
 # Copy the already modified file to the desktop, ensuring consistency
 cp "$MENU_FILE_PATH" "$DESKTOP_FILE_PATH"
 echo "✅ Desktop shortcut created and synchronized with the main menu entry."
