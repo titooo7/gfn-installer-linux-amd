@@ -150,9 +150,6 @@ conty=/userdata/system/pro/steam/conty.sh
 
 DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
 
-# Note: As we discussed, this chmod is redundant but won't cause the formatting error.
-chmod +x "$DIRECT_LAUNCHER_SCRIPT_PATH"
-
 # Execute the script inside the container using MATE's fish shell
 "$conty" \
         --bind /userdata/system/containers/storage /var/lib/containers/storage \
