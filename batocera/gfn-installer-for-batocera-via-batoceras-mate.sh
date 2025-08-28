@@ -19,7 +19,7 @@ echo "Once profork is executed, select the option 'Install Multi-App Arch Contai
 echo "Then select the option 'Insall/Update Arch Container' and click OK"
 echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click K"
 echo ""
-sleep
+sleep 10s
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
@@ -32,7 +32,6 @@ curl -L -o "$INSTALLER_SCRIPT_TO_RUN" "$DOWNLOAD_URL"
 
 # Make the downloaded script executable
 chmod +x "$INSTALLER_SCRIPT_TO_RUN"
-
 
 # Define the path to conty
 conty=/userdata/system/pro/steam/conty.sh
