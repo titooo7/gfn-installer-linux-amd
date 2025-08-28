@@ -12,7 +12,7 @@ This script automates the installation and applies the necessary configurations 
 
   * **Enables GeForce NOW on Unsupported Systems:** NVIDIA’s official Linux support is currently limited to ChromeOS and the Steam Deck. This script installs the official Steam Deck application of GeForce NOW and creates a custom launcher with the required arguments to bypass these restrictions.
 
-  * **Supports High-Resolution Streaming:** Enables GeForce NOW Ultimate subscribers to stream at 1440p 120FPS and up to 4K 60FPS, provided their AMD GPU and display are capable.
+  * **Supports High-Resolution Streaming:** Enables GeForce NOW Ultimate subscribers to stream not just at 1440p 120FPS, but also up to 4K 90FPS, provided their AMD GPU and display are capable.
 
   * **Minimal and Safe:** The script installs the official GeForce NOW application via Flatpak. The only addition is a lightweight launcher script to apply necessary settings, without modifying core system files.
 
@@ -82,14 +82,12 @@ chmod +x install-gfn.sh
 After the script completes, launch GeForce NOW from your application menu or desktop shortcut.
 
 -----
-## Installation for CachyOS
-### Option: Execute Directly
+## Installation for BATOCERA
 
 This command downloads and executes the script without saving it locally.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/gfn-installer-for-batocera-via-batoceras-mate.sh
- | bash
+curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/gfn-installer-for-batocera-via-batoceras-mate.sh | bash
 ```
 ## Uninstallation
 
