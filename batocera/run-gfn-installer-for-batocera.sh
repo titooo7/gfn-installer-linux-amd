@@ -26,8 +26,8 @@ sleep 10
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
-DOWNLOAD_URL="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/refs/heads/main/batocera/install-gfn-batocera.sh"
-INSTALLER_SCRIPT_TO_RUN="/userdata/system/install-gfn-batocera.sh"
+DOWNLOAD_URL="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/refs/heads/main/batocera/gfn-install-core.sh"
+INSTALLER_SCRIPT_TO_RUN="/userdata/system/gfn-install-core.sh"
 
 # Download the latest version of the installation script
 echo "Downloading the latest installer script..."
@@ -41,7 +41,7 @@ conty=/userdata/system/pro/steam/conty.sh
 
 # The script you want to execute inside the container
 # IMPORTANT: Use the full path as seen from Batocera
-INSTALLER_SCRIPT_TO_RUN="/userdata/system/install-gfn-batocera.sh"
+INSTALLER_SCRIPT_TO_RUN="/userdata/system/gfn-install-core.sh"
 
 # Execute the script inside the container using MATE's fish shell
 "$conty" \
