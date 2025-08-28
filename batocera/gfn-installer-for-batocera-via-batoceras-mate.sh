@@ -1,11 +1,12 @@
 #!/bin/bash
 # GPU check: Verify that the graphics card is from AMD
-if ! lspci | grep -i 'VGA compatible controller' | grep -iq 'NVIDIA'; then
+if ! lspci | grep -i 'VGA compatible controller' | grep -iq 'AMD'; then
     echo -e "\e[1;31mERROR: AMD GPU not detected.\e[0m"
     echo -e "\e[0;33mThis installer is specifically designed for systems with AMD graphics cards.\e[0m"
     echo "Script will now exit."
     exit 1
 fi
+echo ""
 echo "AMD GPU detected. So far, so good."
 echo ""
 echo ""
@@ -13,9 +14,9 @@ echo "IMPORTANT: "
 echo "Your Batocera build needs to have profork installed in your Batocera one Desktop from Multi-App Arch Container"
 echo "Otherwise the app might get installed but it won't launch"
 echo ""
-echo "Go to https://github.com/profork/profork for instructions on how to install batocera.pro fork (profork)"
-echo "Once profork is executed, you need to select the option 'Install Multi-App Arch Container' and click OK"
-echo "Now select the option 'Insall/Update Arch Container' and click OK"
+echo "Instructions on how to install batocera.pro fork (profork) are at https://github.com/profork/profork"
+echo "Once profork is executed, select the option 'Install Multi-App Arch Container' and click OK"
+echo "Then select the option 'Insall/Update Arch Container' and click OK"
 echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click K"
 echo ""
 echo "Now it's time for the GeForce NOW installer to do the magic!"
