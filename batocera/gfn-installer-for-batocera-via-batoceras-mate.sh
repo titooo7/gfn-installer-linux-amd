@@ -1,6 +1,6 @@
 #!/bin/bash
 # GPU check: Verify that the graphics card is from AMD
-if ! lspci | grep -i 'VGA compatible controller' | grep -iq 'AMD'; then
+if ! lspci | grep -i 'VGA compatible controller' | grep -iq 'NVIDIA'; then
     echo -e "\e[1;31mERROR: AMD GPU not detected.\e[0m"
     echo -e "\e[0;33mThis installer is specifically designed for systems with AMD graphics cards.\e[0m"
     echo "Script will now exit."
