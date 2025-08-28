@@ -23,6 +23,7 @@ DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
 
 echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
+echo ""
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 # Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
 # Commenting the following two as in theory geforce now will install the required ones, which might be more recent than 24.08 in the future. If it doesnt then remove the comment so it installs the two listed below
@@ -137,7 +138,6 @@ case "$XDG_CURRENT_DESKTOP" in
         ;;
 esac
 echo "✅ Both shortcuts are now ready to launch."
-echo ""
 
 echo "9. Creating shortcut to allow GeForce NOW to be launched from ES-DE main menu"
 echo "That way you don't need to launch MATE/XCFE to launch GeForce NOW"
@@ -168,5 +168,5 @@ fish -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 
 echo "✅ Shortcut for the official GeForce NOW created in Ports."
-
+echo ""
 echo "🎉 Installation complete! You can now launch MATE or XCFE and from there launch GeForce NOW from your desktop OR your application menu."
