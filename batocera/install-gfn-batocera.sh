@@ -23,7 +23,8 @@ DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
 
 echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
+# Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
 flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//24.08 || true
 flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
 
@@ -34,9 +35,10 @@ echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y  --force-remove --user com.nvidia.geforcenow || true
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
-echo "4. Applying required Flatpak overrides. Not required in Batocera as we do it later..."
+echo "4. Applying required Flatpak overrides."
 # flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 # flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+echo "✅ Not required in this step for Batocera as we'll do it later"
 
 echo "5. Creating the custom launcher script..."
 # Ensure the local bin directory exists
