@@ -25,8 +25,9 @@ echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
 echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 # Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
-flatpak install --noninteractive -y --system flathub org.freedesktop.Platform || true
-flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk || true
+# Uncommenting the following two as in theory geforce now will install the required ones, which might be more recent than 24.08 in the future. If it doesnt then remove the comment so it installs the two listed below
+# flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//24.08 || true
+# flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
 
 echo "2. Adding the GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
@@ -165,6 +166,7 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
         --bind / /batocera \
 fish -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
+
 echo "✅ Shortcut for the official GeForce NOW created in Ports."
 
 echo "🎉 Installation complete! You can now launch MATE or XCFE and from there launch GeForce NOW from your desktop OR your application menu."
