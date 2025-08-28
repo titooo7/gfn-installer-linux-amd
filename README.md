@@ -87,7 +87,7 @@ After the script completes, launch GeForce NOW from your application menu or des
 This command downloads and executes the script without saving it locally.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/gfn-installer-for-batocera-via-batoceras-mate.sh | bash
+curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/run-gfn-installer-for-batocera.sh | bash
 ```
 ## Uninstallation
 
