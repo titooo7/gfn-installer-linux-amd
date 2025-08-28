@@ -2,7 +2,7 @@
 
 # Unofficial GeForce NOW Installer for AMD on Linux 🌩️🎮
 
-An automated installer script to configure the official NVIDIA GeForce NOW Flatpak application for use on Arch-based Linux distributions with AMD graphics.
+An automated installer script to **configure the official NVIDIA GeForce NOW** application for use on Arch-based Linux distributions with AMD graphics cards.
 
 This script automates the installation and applies the necessary configurations to enable GeForce NOW to run on hardware that is not officially supported by NVIDIA beyond the Steam Deck.
 
@@ -54,7 +54,7 @@ This script was successfully tested on a system with the following specification
 The installer performs the following steps:
 
 1.  **Install Application:** Installs the official GeForce NOW application and its dependencies using Flatpak.
-2.  **Configure Flatpak Overrides:** Sets necessary permissions for the application sandbox and disables the Wayland socket `(--nosocket=wayland)` to ensure compatibility
+2.  **Configure Flatpak Overrides:** Sets necessary permissions for the application sandbox and disables the Wayland socket `(--nosocket=wayland)` to ensure compatibility on CachyOS or Batocera.
 3.  **Create Custom Launcher:** Creates a bash script at `$HOME/.local/bin/geforce-now-launcher.sh` which starts the application with the required arguments.
 4.  **Modify Desktop Entries:** Updates the `Exec` line in the `.desktop` files for both the application menu and the desktop to point to the new launcher script.
 5.  **Set Shortcut Permissions:** Makes the desktop shortcut executable using `gio set` (for GNOME/Cinnamon) or `chmod +x` (for KDE/XFCE/Other).
