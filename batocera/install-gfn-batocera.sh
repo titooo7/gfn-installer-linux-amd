@@ -32,12 +32,14 @@ echo "2. Adding the GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
 
 echo "3. Installing GeForce NOW..."
-flatpak uninstall --noninteractive -y  --force-remove --user com.nvidia.geforcenow || true
+flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow || true
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
 echo "4. Applying required Flatpak overrides."
 # flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 # flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+# Provide SSL certs from the host. If I uncomment the following override, then the line that contains 'cp -r /etc/ssl /run/host/etc/'  might not be required, but I'm tired of testing so... if it ain't broken...
+# flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
 echo "✅ Not required in this step for Batocera as we'll do it later"
 
 echo "5. Creating the custom launcher script..."
@@ -52,7 +54,7 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 # This script runs GeForce NOW with SteamOS /etc/os-release information
 # and provides the necessary SSL certificates to prevent network errors.
 
-# Creating the required flatpak overrides before launching the app. Otherwise the app won't launch on Batocera mate or xcfe so in reality overrides of step 4 can be deleted as that works in CachyOS but not batocera
+# Creating the required flatpak overrides before launching the app. Otherwise the app won't launch on Batocera's MATE or XCFE Desktop
 flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 
@@ -94,7 +96,9 @@ EOF
 chmod +x "$LAUNCHER_SCRIPT_PATH"
 echo "✅ Custom launcher script created at: $LAUNCHER_SCRIPT_PATH"
 
-echo "6. Creating and modifying the main application menu shortcut..."
+echo "6. Creating and modifying the main application menu shortcut"
+echo "That's for the MATE or XCFE Desktop installed via Profork Arch Multi-App..."
+
 cat > "$MENU_FILE_PATH" << EOF
 [Desktop Entry]
 Version=1.0
@@ -133,4 +137,34 @@ case "$XDG_CURRENT_DESKTOP" in
 esac
 echo "✅ Both shortcuts are now ready to launch."
 echo ""
+
+echo "9. Creating shortcut to allow GeForce NOW to be launched from ES-DE main menu"
+echo "That way you don't need to launch MATE/XCFE to launch GeForce NOW"
+echo "But DO NOT uninstall MATE/XCFE because then't GeForce NOW won't launch!"
+cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << EOF
+#!/bin/bash
+
+# Define the path to conty
+conty=/userdata/system/pro/steam/conty.sh
+
+DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
+
+# Execute the script inside the container using MATE's fish shell
+"$conty" \
+        --bind /userdata/system/containers/storage /var/lib/containers/storage \
+        --bind /userdata/system/flatpak /var/lib/flatpak \
+        --bind /userdata/system/etc/passwd /etc/passwd \
+        --bind /userdata/system/etc/group /etc/group \
+        --bind /var/run/nvidia /run/nvidia \
+        --bind /userdata/system /home/batocera \
+        --bind /sys/fs/cgroup /sys/fs/cgroup \
+        --bind /userdata/system /home/root \
+        --bind /etc/fonts /etc/fonts \
+        --bind /userdata /userdata \
+        --bind /newroot /newroot \
+        --bind / /batocera \
+fish -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
+EOF
+echo "✅ Shortcut for the official GeForce NOW created in Ports."
+
 echo "🎉 Installation complete! You can now launch MATE or XCFE and from there launch GeForce NOW from your desktop OR your application menu."
