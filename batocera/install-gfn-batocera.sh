@@ -31,6 +31,7 @@ echo "2. Adding the GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
 
 echo "3. Installing GeForce NOW..."
+flatpak uninstall --noninteractive -y  --force-remove --user com.nvidia.geforcenow || true
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
 echo "4. Applying required Flatpak overrides. Not required in Batocera as we do it later..."
