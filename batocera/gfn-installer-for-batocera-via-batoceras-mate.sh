@@ -19,7 +19,7 @@ echo "Once profork is executed, select the option 'Install Multi-App Arch Contai
 echo "Then select the option 'Insall/Update Arch Container' and click OK"
 echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click K"
 echo ""
-sleep 10s
+sleep 10
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
