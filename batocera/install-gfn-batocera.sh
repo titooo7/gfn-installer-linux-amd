@@ -25,7 +25,7 @@ echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
 echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 # Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
-# Uncommenting the following two as in theory geforce now will install the required ones, which might be more recent than 24.08 in the future. If it doesnt then remove the comment so it installs the two listed below
+# Commenting the following two as in theory geforce now will install the required ones, which might be more recent than 24.08 in the future. If it doesnt then remove the comment so it installs the two listed below
 # flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//24.08 || true
 # flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
 
@@ -142,13 +142,16 @@ echo ""
 echo "9. Creating shortcut to allow GeForce NOW to be launched from ES-DE main menu"
 echo "That way you don't need to launch MATE/XCFE to launch GeForce NOW"
 echo "But DO NOT uninstall MATE/XCFE because then't GeForce NOW won't launch!"
-cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << EOF
+cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
 # Define the path to conty
 conty=/userdata/system/pro/steam/conty.sh
 
 DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
+
+# Note: As we discussed, this chmod is redundant but won't cause the formatting error.
+chmod +x "$DIRECT_LAUNCHER_SCRIPT_PATH"
 
 # Execute the script inside the container using MATE's fish shell
 "$conty" \
