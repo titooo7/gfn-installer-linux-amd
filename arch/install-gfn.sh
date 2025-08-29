@@ -124,7 +124,7 @@ Type=Application
 Categories=Network;Game;
 EOF
 
-echo "✅ Main menu shortcut modified to use the custom launcher."
+echo "✅ Main menu shortcut modified to use the custom launcher script."
 
 echo "7. Creating/Updating the desktop shortcut..."
 # Copy the already modified file to the desktop, ensuring consistency
