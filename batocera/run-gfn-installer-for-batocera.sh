@@ -1,15 +1,7 @@
 #!/bin/bash
 # GPU check: Verify that the graphics card is from AMD
-if (
-    set -o pipefail
-    GPU_LINE=$(lspci | grep -iE 'VGA compatible controller|Display controller')
-    echo "$GPU_LINE" | grep -iqE 'AMD|ATI|Radeon'
-); then
-    echo "AMD GPU detected. So far, so good."
-else
-    echo -e "\e[1;31mERROR: AMD GPU not detected.\e[0m"
-    echo -e "\e[0;33mThis installer is specifically designed for systems with AMD graphics cards.\e[0m"
-    echo "Script will now exit."
+if ! lspci | grep -i 'VGA' | grep -qi 'amd\|advanced micro devices'; then
+    echo "This script requires an AMD GPU. Exiting."
     exit 1
 fi
 echo ""
