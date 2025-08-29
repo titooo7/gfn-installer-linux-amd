@@ -80,9 +80,10 @@ DOCUMENTATION_URL="https://support.steampowered.com/"
 SUPPORT_URL="https://support.steampowered.com/"
 BUG_REPORT_URL="https://support.steampowered.com/"
 LOGO=steamos
-VARIANT_ID=LegionGoS
-BUILD_ID=20250522.1
-VERSION_ID=3.7.8
+VARIANT_ID=steamdeck
+VERSION_ID=3.7.13
+BUILD_ID=20250630.1
+STEAMOS_DEFAULT_UPDATE_BRANCH=stable
 EOL
 
     # Recursively copy the host system'\''s SSL certificates into the sandbox
