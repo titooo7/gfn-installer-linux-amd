@@ -1,6 +1,6 @@
 #!/bin/bash
 # GPU check: Verify that the graphics card is from AMD
-if ! lspci | grep -i 'VGA compatible controller' | grep -iq 'AMD'; then
+if ! lspci | grep -iE 'VGA compatible controller|Display controller' | grep -iqE 'AMD|ATI|Radeon|Advanced Micro Devices'; then
     echo -e "\e[1;31mERROR: AMD GPU not detected.\e[0m"
     echo -e "\e[0;33mThis installer is specifically designed for systems with AMD graphics cards.\e[0m"
     echo "Script will now exit."
@@ -10,7 +10,7 @@ echo ""
 echo "AMD GPU detected. So far, so good."
 echo ""
 echo ""
-echo "🛑 IMPORTANT: "
+echo "🛑 IMPORTANT 🛑"
 echo "Your Batocera build needs to have profork installed in your Batocera one Desktop from Multi-App Arch Container"
 echo "Otherwise the app might get installed but it won't launch"
 echo ""
@@ -18,30 +18,33 @@ echo "Instructions on how to install batocera.pro fork (profork) are at https://
 echo ""
 echo "Once profork is executed, select the option 'Install Multi-App Arch Container' and click OK"
 echo ""
-echo "Then select the option 'Insall/Update Arch Container' and click OK"
+echo "Then select the option 'Install/Update Arch Container' and click OK"
 echo ""
-echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click K"
+echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
 echo ""
 sleep 10
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
-DOWNLOAD_URL="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/refs/heads/main/batocera/gfn-install-core.sh"
+DOWNLOAD_URL="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/gfn-install-core.sh"
 INSTALLER_SCRIPT_TO_RUN="/userdata/system/gfn-install-core.sh"
 
 # Download the latest version of the installation script
-echo "Downloading the latest installer script..."
-curl -L -o "$INSTALLER_SCRIPT_TO_RUN" "$DOWNLOAD_URL"
+echo "Downloading the latest installer setup script..."
+if ! curl -fL -o "$INSTALLER_SCRIPT_TO_RUN" "$DOWNLOAD_URL"; then
+    echo "Download failed (file not found or network error). Exiting."
+    exit 1
+fi
 
 # Make the downloaded script executable
 chmod +x "$INSTALLER_SCRIPT_TO_RUN"
 
 # Define the path to conty
 conty=/userdata/system/pro/steam/conty.sh
-
-# The script you want to execute inside the container
-# IMPORTANT: Use the full path as seen from Batocera
-INSTALLER_SCRIPT_TO_RUN="/userdata/system/gfn-install-core.sh"
+if [ ! -x "$conty" ]; then
+    echo "ERROR: conty.sh not found at $conty Please make sure to install the Multi-App Arch Container using Profork"
+    exit 1
+fi
 
 # Execute the script inside the container using MATE's fish shell
 "$conty" \
@@ -49,7 +52,6 @@ INSTALLER_SCRIPT_TO_RUN="/userdata/system/gfn-install-core.sh"
         --bind /userdata/system/flatpak /var/lib/flatpak \
         --bind /userdata/system/etc/passwd /etc/passwd \
         --bind /userdata/system/etc/group /etc/group \
-        --bind /var/run/nvidia /run/nvidia \
         --bind /userdata/system /home/batocera \
         --bind /sys/fs/cgroup /sys/fs/cgroup \
         --bind /userdata/system /home/root \
