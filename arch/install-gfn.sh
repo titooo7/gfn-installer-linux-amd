@@ -30,9 +30,10 @@ echo "Before we start we will need to install Flatpak, which requires root permi
 echo ""
 if ! pacman -Q flatpak > /dev/null; then
     sudo pacman -Syu --noconfirm flatpak
+echo "✅ Flatpak installed! From now one everything will be installed with your standard user permissions"
 fi
 echo ""
-echo "flatpak is now instlled, from now on everything will be installed with your regular user permissions"
+echo "✅ Flatpak is already installed! Good!"
 echo ""
 
 # --- Installation Steps ---
@@ -42,14 +43,16 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
 flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//24.08 || true
 flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
+echo "✅ Required runtimes installed added"
 
 echo "2. Adding the GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
+echo "✅ GeForce NOW repo added"
 
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
-echo "✅ GeForce NOW installed. Tweaking few things so it can launc succesfully..."
+echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
 echo "4. Applying required Flatpak overrides..."
 flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
