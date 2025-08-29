@@ -80,7 +80,7 @@ DOCUMENTATION_URL="https://support.steampowered.com/"
 SUPPORT_URL="https://support.steampowered.com/"
 BUG_REPORT_URL="https://support.steampowered.com/"
 LOGO=steamos
-VARIANT_ID=steamdeck
+VARIANT_ID=LegionGoS
 BUILD_ID=20250522.1
 VERSION_ID=3.7.8
 EOL
