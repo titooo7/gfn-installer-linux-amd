@@ -27,13 +27,18 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
 flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//24.08 || true
 flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
+echo "✅ Required runtimes installed added"
 
 echo "2. Adding the official GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
+echo "✅ GeForce NOW repo added"
 
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
+# We are also downloading the logo because for some reason our installer doens't and otherwise the icon of the app will be blank in the menu and desktop
+curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
+echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
 
 echo "4. Applying required Flatpak overrides."
 # flatpak override --user --nosocket=wayland com.nvidia.geforcenow
@@ -111,7 +116,7 @@ Type=Application
 Categories=Network;Game;
 EOF
 
-echo "✅ Main menu shortcut modified to use the custom launcher."
+echo "✅ Main menu shortcut modified to use the custom launcher script."
 
 echo "7. Creating/Updating the desktop shortcut..."
 # Copy the already modified file to the desktop, ensuring consistency
@@ -139,14 +144,16 @@ esac
 echo "✅ Both shortcuts are now ready to launch."
 
 echo "9. Creating shortcut to allow GeForce NOW to be launched from ES-DE main menu"
-echo "That way you don't need to launch MATE/XCFE to launch GeForce NOW"
-echo "But DO NOT uninstall MATE/XCFE because then't GeForce NOW won't launch!"
+echo "That way you don't need to launch MATE/XCFE first to launch GeForce NOW"
+echo "But DO NOT uninstall MATE/XCFE. If you do that, then GeForce NOW won't launch!"
 cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
 # Define the path to conty
+#------------------------------------------------
 conty=/userdata/system/pro/steam/conty.sh
-
+#------------------------------------------------
+batocera-mouse show
 DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
 
 # Execute the script inside the container using MATE's fish shell
@@ -166,10 +173,10 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
 fish -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 
-echo "✅ Shortcut for the official GeForce NOW created in Ports."
+echo "✅ Shortcut for the official GeForce NOW created in Ports section of the main menu."
 echo ""
-echo "🎉 Installation complete! You can now launch MATE or XCFE, and from there launch GeForce NOW from using the desktop  icon OR MATE/XCFE application menu."
-# TO DO: TRYING TO ADD GeForce NOW TO THE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
+echo "🎉 Installation complete! You can now launch MATE or XCFE, and from there launch GeForce NOW using the desktop icon or the one in MATE/XCFE application menu."
+# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
 <?xml version="1.0"?>
 <systemList>
@@ -194,14 +201,17 @@ cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
   </system>
 </systemList>
 EOF
-# The above file will make it appear in the menu but it wont launch the app directly yet, it will still show the script that are saved in the path mentioned there. I'm still trying to figure out how to fix that
+# The above file will make a GeForce NOW appear in ES-DE main menu,but it wont launch the app directly yet... it will still just show the sh scripts that are saved in the path mentioned in that cfg file. 
+# I'm still trying to figure out how to fix that...
 #
-# The next lines are just to copy the launch script to the location related to the main menu
+# The next lines are the ones required to copy the launch script to the location related to the main menu. That way when we click on GeForce NOW it will show a geforce now script. 
+# Remember that the goal is to click on the menu and launch GeForce NOW and not to show a list of sh scripts
+# But since we cant do that yet then lets add a script there so geforce now can be launched...
 mkdir -p /userdata/roms/geforcenow
 # 
 cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow/"
 #
-# The next ones are just to download the images and logos for the main menu
+# The next ones are just to download the images and logos for the Geforce Now entry in ES-DE main menu
 curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
 curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow.jpg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
 curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow.svg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
