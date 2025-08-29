@@ -5,6 +5,9 @@ if ! lspci | grep -i 'VGA' | grep -qi 'amd\|advanced micro devices'; then
     exit 1
 fi
 echo ""
+echo "✅ AMD GPU detected. So far, so good."
+echo ""
+echo ""
 echo "🛑 IMPORTANT 🛑"
 echo "Your Batocera build needs to have profork installed in your Batocera one Desktop from Multi-App Arch Container"
 echo "Otherwise the app might get installed but it won't launch"
@@ -27,7 +30,7 @@ INSTALLER_SCRIPT_TO_RUN="/userdata/system/gfn-install-core.sh"
 # Download the latest version of the installation script
 echo "Downloading the latest installer setup script..."
 if ! curl -fL -o "$INSTALLER_SCRIPT_TO_RUN" "$DOWNLOAD_URL"; then
-    echo "Download failed (file not found or network error). Exiting."
+    echo "⚠️ Download failed (file not found or network error). Exiting."
     exit 1
 fi
 
@@ -37,7 +40,7 @@ chmod +x "$INSTALLER_SCRIPT_TO_RUN"
 # Define the path to conty
 conty=/userdata/system/pro/steam/conty.sh
 if [ ! -x "$conty" ]; then
-    echo "ERROR: conty.sh not found at $conty Please make sure to install the Multi-App Arch Container using Profork"
+    echo "⚠️ ERROR: conty.sh not found at $conty Please make sure to install the Multi-App Arch Container using Profork"
     exit 1
 fi
 
