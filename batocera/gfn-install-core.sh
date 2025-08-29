@@ -28,25 +28,25 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 flatpak install --noninteractive -y --system flathub org.freedesktop.Platform//24.08 || true
 flatpak install --noninteractive -y --system flathub org.freedesktop.Sdk//24.08 || true
 echo "✅ Required runtimes installed added"
-
+echo ""
 echo "2. Adding the official GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
 echo "✅ GeForce NOW repo added"
-
+echo ""
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 # We are also downloading the logo because for some reason our installer doens't and otherwise the icon of the app will be blank in the menu and desktop
-curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
+curl -sL -o "$USER_HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
 echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
-
+echo ""
 echo "4. Applying required Flatpak overrides."
 # flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 # flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 # Provide SSL certs from the host. If I uncomment the following override, then the line that contains 'cp -r /etc/ssl /run/host/etc/'  might not be required, but I'm tired of testing so... if it ain't broken...
 # flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
 echo "✅ Not required in this step for Batocera as we'll do it later"
-
+echo ""
 echo "5. Creating the custom launcher script..."
 # Ensure the local bin directory exists
 mkdir -p "$LAUNCHER_DIR"
@@ -101,7 +101,7 @@ EOF
 # Make the launcher script executable
 chmod +x "$LAUNCHER_SCRIPT_PATH"
 echo "✅ Custom launcher script created at: $LAUNCHER_SCRIPT_PATH"
-
+echo ""
 echo "6. Creating and modifying the main application menu shortcut"
 echo "That's for the MATE or XCFE Desktop installed via Profork Arch Multi-App..."
 
@@ -117,12 +117,12 @@ Categories=Network;Game;
 EOF
 
 echo "✅ Main menu shortcut modified to use the custom launcher script."
-
+echo ""
 echo "7. Creating/Updating the desktop shortcut..."
 # Copy the already modified file to the desktop, ensuring consistency
 cp "$MENU_FILE_PATH" "$DESKTOP_FILE_PATH"
 echo "✅ Desktop shortcut created and synchronized with the main menu entry."
-
+echo ""
 echo "8. Making shortcuts launchable..."
 # We now apply the correct method to BOTH the menu file and the desktop file.
 
@@ -142,7 +142,7 @@ case "$XDG_CURRENT_DESKTOP" in
         ;;
 esac
 echo "✅ Both shortcuts are now ready to launch."
-
+echo ""
 echo "9. Creating shortcut to allow GeForce NOW to be launched from ES-DE main menu"
 echo "That way you don't need to launch MATE/XCFE first to launch GeForce NOW"
 echo "But DO NOT uninstall MATE/XCFE. If you do that, then GeForce NOW won't launch!"
