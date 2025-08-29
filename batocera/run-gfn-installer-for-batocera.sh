@@ -54,4 +54,4 @@ fi
         --bind /userdata /userdata \
         --bind /newroot /newroot \
         --bind / /batocera \
-fish -c "$INSTALLER_SCRIPT_TO_RUN"
+bash -c "$INSTALLER_SCRIPT_TO_RUN"
