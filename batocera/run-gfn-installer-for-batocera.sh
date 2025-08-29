@@ -10,6 +10,7 @@ echo ""
 echo ""
 echo "🛑 IMPORTANT 🛑"
 echo "Your Batocera build needs to have profork installed in your Batocera one Desktop from Multi-App Arch Container"
+echo ""
 echo "Otherwise the app might get installed but it won't launch"
 echo ""
 echo "Instructions on how to install batocera.pro fork (profork) are at https://github.com/profork/profork"
@@ -20,7 +21,7 @@ echo "Then select the option 'Install/Update Arch Container' and click OK"
 echo ""
 echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
 echo ""
-sleep 1
+sleep 10
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
