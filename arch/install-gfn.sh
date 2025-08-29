@@ -47,7 +47,7 @@ echo "2. Adding the GeForce NOW Flatpak repository..."
 flatpak remote-add --user --if-not-exists GeForceNOW https://international.download.nvidia.com/GFNLinux/flatpak/geforcenow.flatpakrepo || true
 
 echo "3. Installing GeForce NOW..."
-flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow || true
+flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
 echo "4. Applying required Flatpak overrides..."
