@@ -27,6 +27,13 @@ DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
 DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
 
 # --- Installation Steps ---
+echo ""
+echo "Before we start we will need to install Flatpak, which requires root permissions to get it installed"
+echo ""
+sudo pacman -Syu flatpak
+echo ""
+echo "flatpak is now instlled, from now on everything will be installed with your regular user permissions"
+echo ""
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
 echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
