@@ -68,13 +68,13 @@ The installer performs the following steps:
 This command downloads and executes the script without saving it locally.
 
 ```bash
-curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh | bash
+curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh | bash
 ```
 
 ### Option 2: Download and Run Manually
 
 ```bash
-curl -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/install-gfn.sh
+curl -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh
 chmod +x install-gfn.sh
 ./install-gfn.sh
 ```
