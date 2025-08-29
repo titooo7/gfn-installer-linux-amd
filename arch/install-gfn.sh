@@ -1,7 +1,7 @@
 #!/bin/bash
 # GPU check: Verify that the graphics card is from AMD
 if ! lspci | grep -i 'VGA' | grep -qi 'amd\|advanced micro devices'; then
-    echo "This script requires an AMD GPU. Exiting."
+    echo "⚠️ This script requires an AMD GPU. Exiting."
     exit 1
 fi
 echo ""
