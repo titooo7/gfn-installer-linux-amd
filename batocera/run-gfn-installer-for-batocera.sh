@@ -1,14 +1,17 @@
 #!/bin/bash
 # GPU check: Verify that the graphics card is from AMD
-if ! lspci | grep -iE 'VGA compatible controller|Display controller' | grep -iqE 'AMD|ATI|Radeon|Advanced Micro Devices'; then
+if (
+    set -o pipefail
+    GPU_LINE=$(lspci | grep -iE 'VGA compatible controller|Display controller')
+    echo "$GPU_LINE" | grep -iqE 'AMD|ATI|Radeon'
+); then
+    echo "AMD GPU detected. So far, so good."
+else
     echo -e "\e[1;31mERROR: AMD GPU not detected.\e[0m"
     echo -e "\e[0;33mThis installer is specifically designed for systems with AMD graphics cards.\e[0m"
     echo "Script will now exit."
     exit 1
 fi
-echo ""
-echo "AMD GPU detected. So far, so good."
-echo ""
 echo ""
 echo "🛑 IMPORTANT 🛑"
 echo "Your Batocera build needs to have profork installed in your Batocera one Desktop from Multi-App Arch Container"
