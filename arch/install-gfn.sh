@@ -42,10 +42,12 @@ flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow || true
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
 echo "4. Applying required Flatpak overrides..."
-flatpak override --user --nosocket=wayland com.nvidia.geforcenow
-flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
-# Provide SSL certs from the host. If I uncomment the following override, then the line that contains 'cp -r /etc/ssl /run/host/etc/'  might not be required, but I'm tired of testing so... if it ain't broken...
-# flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
+flatpak override --user \
+    --nosocket=wayland \
+    --nofilesystem=host-etc \
+    --filesystem=/etc/ssl/certs:/run/host-certs:ro \
+    --env=SSL_CERT_DIR=/run/host-certs \
+    com.nvidia.geforcenow
 
 echo "5. Creating the custom launcher script..."
 # Ensure the local bin directory exists
@@ -60,13 +62,8 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 
 # Run the flatpak command with the required setup
 flatpak run --user --command=bash com.nvidia.geforcenow -c '
-    # Exit immediately if a command exits with a non-zero status.
     set -e
-
-    # Create the directory that holds the os-release and SSL certs
-    mkdir -p /run/host/etc/ssl
-
-    # Create the SteamOS os-release file
+    mkdir -p /run/host/etc
     cat > /run/host/etc/os-release << EOL
 NAME="SteamOS"
 PRETTY_NAME="SteamOS Holo"
@@ -83,11 +80,6 @@ VARIANT_ID=steamdeck
 BUILD_ID=20250320.1000
 VERSION_ID=3.8
 EOL
-
-    # Recursively copy the host system'\''s SSL certificates into the sandbox
-    cp -r /etc/ssl /run/host/etc/
-
-    # Launch GeForce NOW
     /app/bin/GeForceNOW
 '
 EOF
