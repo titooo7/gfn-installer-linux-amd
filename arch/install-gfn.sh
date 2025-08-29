@@ -52,6 +52,8 @@ echo "✅ GeForce NOW repo added"
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
+# We are also downloading the logo because for some reason our installer doens't and otherwise the icon of the app will be blank in the menu and desktop
+curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
 echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
 echo "4. Applying required Flatpak overrides..."
 flatpak override --user --nosocket=wayland com.nvidia.geforcenow
@@ -148,8 +150,6 @@ case "$XDG_CURRENT_DESKTOP" in
         chmod +x "$DESKTOP_FILE_PATH"
         ;;
 esac
-# We are adding also downloading the logo because for some reason our installer doens't and otherwise the icon of the app will be blank in the menu and desktop
-curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
 echo "✅ Both shortcuts are now ready to launch."
 echo ""
 echo "🎉 Installation complete! You can now launch GeForce NOW from your desktop OR your application menu."
