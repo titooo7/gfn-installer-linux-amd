@@ -25,6 +25,13 @@ MENU_FILE_PATH="$HOME/.local/share/applications/$DESKTOP_FILE_NAME" # The "sourc
 DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
 # Define the full path for the desktop shortcut
 DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
+echo ""
+echo "Before we start we will need to install Flatpak, which requires root permissions to get it installed"
+echo ""
+sudo pacman -Syu flatpak
+echo ""
+echo "flatpak is now instlled, from now on everything will be installed with your regular user permissions"
+echo ""
 
 # --- Installation Steps ---
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
