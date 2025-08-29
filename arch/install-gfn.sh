@@ -45,8 +45,8 @@ echo "4. Applying required Flatpak overrides..."
 flatpak override --user \
     --nosocket=wayland \
     --nofilesystem=host-etc \
-    --filesystem=/etc/ssl/certs:/run/host-certs:ro \
-    --env=SSL_CERT_DIR=/run/host-certs \
+    --filesystem=/etc/ssl/certs \
+    --env=SSL_CERT_DIR=/etc/ssl/certs \
     com.nvidia.geforcenow
 
 echo "5. Creating the custom launcher script..."
