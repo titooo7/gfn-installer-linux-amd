@@ -49,10 +49,11 @@ flatpak remote-add --user --if-not-exists GeForceNOW https://international.downl
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
-
+echo "✅ GeForce NOW installed. Tweaking few things so it can launc succesfully..."
 echo "4. Applying required Flatpak overrides..."
 flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+echo "✅ Flatpak overrides applied"
 
 echo "5. Creating the custom launcher script..."
 # Ensure the local bin directory exists
