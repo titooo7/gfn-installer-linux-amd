@@ -168,14 +168,46 @@ EOF
 
 echo "✅ Shortcut for the official GeForce NOW created in Ports."
 echo ""
-# mkdir -p /userdata/roms/geforcenow
-# mkdir -p /userdata/themes/es-theme-carbon/arts/console
-# mkdir -p /userdata/themes/es-theme-carbon/arts/controllers
-# mkdir -p /userdata/themes/es-theme-carbon/arts/background
-# mkdir -p /userdata/themes/es-theme-carbon/arts/logo
-# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow/
-# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow/
-# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow/
-# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/consoles/geforcenow/
-# chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
-echo "🎉 Installation complete! You can now launch MATE or XCFE and from there launch GeForce NOW from your desktop OR your application menu."
+echo "🎉 Installation complete! You can now launch MATE or XCFE, and from there launch GeForce NOW from using the desktop  icon OR MATE/XCFE application menu."
+# TO DO: TRYING TO ADD GeForce NOW TO THE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
+cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
+<?xml version="1.0"?>
+<systemList>
+  <system>
+    <fullname>GeForce NOW</fullname>
+    <name>geforcenow</name>
+    <manufacturer>NVIDIA</manufacturer>
+    <release>2025</release>
+    <hardware>port</hardware>
+    <path>/userdata/roms/geforcenow</path>
+    <extension>.sh .SH</extension>
+    <command>sh %ROM%</command>
+    <platform>pc</platform>
+    <theme>geforcenow</theme>
+    <emulators>
+      <emulator name="geforcenow">
+        <cores>
+          <core default="true">heroic2</core>
+        </cores>
+      </emulator>
+    </emulators>
+  </system>
+</systemList>
+EOF
+# The above file will make it appear in the menu but it wont launch the app directly yet, it will still show the script that are saved in the path mentioned there. I'm still trying to figure out how to fix that
+#
+# The next lines are just to copy the launch script to the location related to the main menu
+mkdir -p /userdata/roms/geforcenow
+# 
+cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow/"
+#
+# The next ones are just to download the images and logos for the main menu
+curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
+curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow.jpg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
+curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow.svg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
+curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/consoles/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
+#
+# We give permission to the script that should be used in the main menu
+chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
+echo "🎉 Installation complete! Now you can launch the Official GeForce NOW App from Batocera's main menu"
+
