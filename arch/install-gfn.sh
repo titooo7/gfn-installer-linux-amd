@@ -31,7 +31,6 @@ echo ""
 echo "Before we start we will need to install Flatpak, which requires root permissions to get it installed"
 echo ""
 sudo pacman -Syu flatpak
-echo ""
 echo "flatpak is now instlled, from now on everything will be installed with your regular user permissions"
 echo ""
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
