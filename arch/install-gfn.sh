@@ -7,7 +7,7 @@ if ! lspci | grep -i 'VGA compatible controller' | grep -iq 'AMD'; then
     exit 1
 fi
 echo ""
-echo "AMD GPU detected. So far, so good."
+echo "✅ AMD GPU detected. So far, so good."
 echo ""
 # Exit immediately if a command exits with a non-zero status.
 set -e
@@ -30,7 +30,7 @@ echo "Before we start we will need to install Flatpak, which requires root permi
 echo ""
 if ! pacman -Q flatpak > /dev/null; then
     sudo pacman -Syu --noconfirm flatpak
-echo "✅ Flatpak installed! From now one everything will be installed with your standard user permissions"
+echo "✅ root permissions used to install Flatpak. From now on everything will be installed with your standard user permissions"
 fi
 echo ""
 echo "✅ Flatpak is already installed! Good!"
