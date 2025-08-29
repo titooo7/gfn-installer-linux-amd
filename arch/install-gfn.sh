@@ -71,7 +71,7 @@ flatpak run --user --command=bash com.nvidia.geforcenow -c '
     # Create the SteamOS os-release file
     cat > /run/host/etc/os-release << EOL
 NAME="SteamOS"
-PRETTY_NAME="SteamOS"
+PRETTY_NAME="SteamOS Holo"
 VERSION_CODENAME=holo
 ID=steamos
 ID_LIKE=arch
@@ -82,8 +82,8 @@ SUPPORT_URL="https://support.steampowered.com/"
 BUG_REPORT_URL="https://support.steampowered.com/"
 LOGO=steamos
 VARIANT_ID=steamdeck
-BUILD_ID=20250522.1
-VERSION_ID=3.7.8
+BUILD_ID=20250320.1000
+VERSION_ID=3.8
 EOL
 
     # Recursively copy the host system'\''s SSL certificates into the sandbox
