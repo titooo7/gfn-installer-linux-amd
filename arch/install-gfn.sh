@@ -28,7 +28,9 @@ DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
 echo ""
 echo "Before we start we will need to install Flatpak, which requires root permissions to get it installed"
 echo ""
-sudo pacman -Syu --noconfirm flatpak
+if ! pacman -Q flatpak > /dev/null; then
+    sudo pacman -Syu --noconfirm flatpak
+fi
 echo ""
 echo "flatpak is now instlled, from now on everything will be installed with your regular user permissions"
 echo ""
