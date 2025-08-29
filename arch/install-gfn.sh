@@ -27,8 +27,8 @@ DESKTOP_FILE_PATH="$DESKTOP_DIR/$DESKTOP_FILE_NAME"
 
 # --- Installation Steps ---
 echo "🚀 Starting GeForce NOW Installer for AMD Linux Systems..."
-
-echo "1. Adding Flathub repo and installing required Flatpak runtimes..."
+echo "1. Installing Flatpak, adding Flathub repo and installing required Flatpak runtimes..."
+sudo pacman -Syu flatpak || true
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
 # Added '--nonintereactive' to prevent the script from asking and '|| true' to prevent script from exiting if this step fails (e.g., due to user input issues).
 # Commenting the following two as in theory geforce now will install the required ones, which might be more recent than 24.08 in the future. If it doesnt then remove the comment so it installs the two listed below
