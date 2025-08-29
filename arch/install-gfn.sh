@@ -19,6 +19,7 @@ LAUNCHER_SCRIPT_PATH="$LAUNCHER_DIR/geforce-now-launcher.sh"
 
 # Define the file name and the two key locations
 DESKTOP_FILE_NAME="com.nvidia.geforcenow.desktop"
+LOCAL_SHARE_APPLICATIONS="$HOME/.local/share/applications"
 MENU_FILE_PATH="$HOME/.local/share/applications/$DESKTOP_FILE_NAME" # The "source" file for the app menu
 # Find the user's desktop directory, falling back to "$HOME/Desktop" if the command fails
 DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
@@ -49,7 +50,6 @@ flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 echo "5. Creating the custom launcher script..."
 # Ensure the local bin directory exists
 mkdir -p "$LAUNCHER_DIR"
-
 # Create the launcher script using a heredoc
 cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 #!/bin/bash
@@ -97,6 +97,10 @@ chmod +x "$LAUNCHER_SCRIPT_PATH"
 echo "✅ Custom launcher script created at: $LAUNCHER_SCRIPT_PATH"
 
 echo "6. Creating and modifying the main application menu shortcut..."
+# Ensure /home/your-real-username/.local/share/applications/ exists
+mkdir -p "$LOCAL_SHARE_APPLICATIONS"
+# Creating the custom com.nvidia.geforcenow.desktp at /home/your-real-username/.local/share/applications
+
 cat > "$MENU_FILE_PATH" << EOF
 [Desktop Entry]
 Version=1.0
