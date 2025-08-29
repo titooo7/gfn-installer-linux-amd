@@ -59,7 +59,7 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 # and provides the necessary SSL certificates to prevent network errors.
 
 # Run the flatpak command with the required setup
-flatpak run --user --command=sh com.nvidia.geforcenow -c '
+flatpak run --user --command=bash com.nvidia.geforcenow -c '
     # Exit immediately if a command exits with a non-zero status.
     set -e
 
