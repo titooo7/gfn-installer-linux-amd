@@ -42,12 +42,8 @@ flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow || true
 flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
 
 echo "4. Applying required Flatpak overrides..."
-flatpak override --user \
-    --nosocket=wayland \
-    --nofilesystem=host-etc \
-    --filesystem=/etc/ssl/certs \
-    --env=SSL_CERT_DIR=/etc/ssl/certs \
-    com.nvidia.geforcenow
+flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 
 echo "5. Creating the custom launcher script..."
 # Ensure the local bin directory exists
@@ -62,11 +58,16 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 
 # Run the flatpak command with the required setup
 flatpak run --user --command=bash com.nvidia.geforcenow -c '
+    # Exit immediately if a command exits with a non-zero status.
     set -e
-    mkdir -p /run/host/etc
+
+    # Create the directory that holds the os-release and SSL certs
+    mkdir -p /run/host/etc/ssl
+
+    # Create the SteamOS os-release file
     cat > /run/host/etc/os-release << EOL
 NAME="SteamOS"
-PRETTY_NAME="SteamOS Holo"
+PRETTY_NAME="SteamOS"
 VERSION_CODENAME=holo
 ID=steamos
 ID_LIKE=arch
@@ -76,10 +77,15 @@ DOCUMENTATION_URL="https://support.steampowered.com/"
 SUPPORT_URL="https://support.steampowered.com/"
 BUG_REPORT_URL="https://support.steampowered.com/"
 LOGO=steamos
-VARIANT_ID=steamdeck
-BUILD_ID=20250320.1000
-VERSION_ID=3.8
+VARIANT_ID=LegionGoS
+BUILD_ID=20250522.1
+VERSION_ID=3.7.8
 EOL
+
+    # Recursively copy the host system'\''s SSL certificates into the sandbox
+    cp -r /etc/ssl /run/host/etc/
+
+    # Launch GeForce NOW
     /app/bin/GeForceNOW
 '
 EOF
