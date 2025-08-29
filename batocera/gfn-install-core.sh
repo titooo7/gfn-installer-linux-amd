@@ -168,4 +168,14 @@ EOF
 
 echo "✅ Shortcut for the official GeForce NOW created in Ports."
 echo ""
+# mkdir -p /userdata/roms/geforcenow
+# mkdir -p /userdata/themes/es-theme-carbon/arts/console
+# mkdir -p /userdata/themes/es-theme-carbon/arts/controllers
+# mkdir -p /userdata/themes/es-theme-carbon/arts/background
+# mkdir -p /userdata/themes/es-theme-carbon/arts/logo
+# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow/
+# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow/
+# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow/
+# curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/consoles/geforcenow/
+# chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 echo "🎉 Installation complete! You can now launch MATE or XCFE and from there launch GeForce NOW from your desktop OR your application menu."
