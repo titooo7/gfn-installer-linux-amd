@@ -4,7 +4,7 @@
 
 An automated installer script to **configure the official NVIDIA GeForce NOW** application for use on Arch-based Linux distributions with AMD graphics cards.
 
-This script automates the installation and applies the necessary configurations to enable GeForce NOW to run on hardware that is not officially supported by NVIDIA beyond the Steam Deck.
+This script automates the installation and applies the necessary configurations enabling the official GeForce NOW app to run on hardware and Linux software that is not officially supported by NVIDIA.
 
 -----
 
