@@ -185,25 +185,24 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# Read user input with validation (this is the key part that fixes your issue)
+# Read user input with validation (case-insensitive)
 while true; do
     read -p "Do you want to proceed? (Y/n): " response < /dev/tty
-    response=${response,,}
     
-    if [[ "$response" == "n" || "$response" == "no" ]]; then
+    # Convert to lowercase for case-insensitive comparison
+    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+    
+    if [[ "$response_lower" =~ ^(n|no)$ ]]; then
         echo "Exiting script as requested."
         exit 0
-    elif [[ -z "$response" || "$response" == "y" || "$response" == "yes" ]]; then
+    elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
+        echo "👍 OK, proceeding with the main menu setup..."
+        echo ""
         break
     else
         echo "Invalid response. Please enter Y or N."
     fi
 done
-
-echo "👍 OK, proceeding with the main menu setup..."
-echo ""
-# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
-echo "👍 OK, proceeding with the main menu setup..."
 echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
