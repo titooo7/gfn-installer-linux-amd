@@ -184,22 +184,23 @@ echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main
 echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
-# Ask the user
-read -p "Proceed? (Y = Yes, N = No to finish installation): " create_menu_entry < /dev/tty || true
 
-# Normalize input:
-# - strip carriage returns/newlines
-# - strip leading/trailing spaces
-# - force uppercase
-create_menu_entry=$(echo "$create_menu_entry" | tr -d '\r\n' | xargs | tr '[:lower:]' '[:upper:]')
+# Ask user for confirmation
+read -p "Do you want to continue? (Y/N): " answer
 
-# Decide based on cleaned input
-if [[ "$create_menu_entry" == "Y" ]]; then
-    echo "Creating menu entry..."
-else
-    echo "Skipping main menu entry"
-    exit 0
-fi
+case "$answer" in
+    [Yy]* )
+        echo "👍 OK, proceeding with the main menu setup..."
+        ;;
+    [Nn]* )
+        echo "❌ Installation aborted by user."
+        exit 0
+        ;;
+    * )
+        echo "⚠️ Invalid input. Please run the script again and answer Y or N."
+        exit 1
+        ;;
+esac
 
 echo "👍 OK, proceeding with the main menu setup..."
 echo ""
@@ -287,4 +288,3 @@ echo "✅ You can now select ES-THEME-CARBON-GFN in the User Interface Settings"
 # We give permission to the script that should be used in the main menu
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 echo "🎉 Installation complete! Now you can launch the Official GeForce NOW App from Batocera's main menu (ES-DE)"
-
