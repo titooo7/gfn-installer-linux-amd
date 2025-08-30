@@ -179,6 +179,30 @@ echo ""
 echo "👌 You can now launch MATE or XCFE, and from there launch GeForce NOW (using the desktop icon or the one in MATE/XCFE application menu)."
 echo ""
 echo ""
+echo "✅ Shortcut for the official GeForce NOW created in Ports section of the main menu."
+echo ""
+echo "👌 You can now launch MATE or XCFE, and from there launch GeForce NOW (using the desktop icon or the one in MATE/XCFE application menu)."
+echo ""
+echo ""
+
+# --- Optional: Create Main Menu Entry ---
+echo "------------------------------------------------------------------"
+echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main menu?"
+echo "Please note that this requires making a copy of the es-theme-carbon theme"
+echo "and will use approximately 170MB of space."
+echo ""
+read -p "Proceed? (Y = Yes, N = No to finish installation): " create_menu_entry
+echo ""
+
+# If the user's answer is anything other than 'Y' or 'y', we exit.
+if [[ "$create_menu_entry" != "Y" && "$create_menu_entry" != "y" ]]; then
+    echo "Skipping main menu entry."
+    echo "🎉 Installation complete! You can launch GeForce NOW from the 'Ports' section."
+    exit 0
+fi
+
+echo "👍 OK, proceeding with the main menu setup..."
+echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
 <?xml version="1.0"?>
