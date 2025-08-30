@@ -223,8 +223,11 @@ echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 #curl -sL -o "$THEME_DIR/art/controllers/geforcenow.svg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
 #curl -sL -o "$THEME_DIR/art/consoles/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
 
+echo "Creating a clone/mod of es-theme-carbon theme, so we can have GeForce NOW in the main menu"
+cp -r /usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
+echo ""
 # Define the persistent theme directory
-THEME_DIR="/userdata/themes/es-theme-carbon"
+THEME_DIR="/userdata/themes/es-theme-carbon-gfn"
 # Define target directories and URLs
 declare -A files=(
     ["$THEME_DIR/art/logos/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png"
@@ -254,6 +257,7 @@ for dest in "${!files[@]}"; do
     fi
 done
 
+"✅ You can now select ES-THEME-CARBON-GFN in Batocera 'User Interface Settings'"
 # We give permission to the script that should be used in the main menu
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 echo "🎉 Installation complete! Now you can launch the Official GeForce NOW App from Batocera's main menu (ES-DE)"
