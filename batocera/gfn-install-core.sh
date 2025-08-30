@@ -184,11 +184,7 @@ echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main
 echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
-# Temporarily disable 'set -e' for the read command.
-set +e
-read -p "Proceed? (Y = Yes, N = No to finish installation): " create_menu_entry
-# Re-enable 'set -e'.
-set -e
+read -p "Proceed? (Y = Yes, N = No to finish installation): " create_menu_entry < /dev/tty || true
 
 echo ""
 # If the user's answer is anything other than 'Y' or 'y', we exit.
