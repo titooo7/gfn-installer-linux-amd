@@ -227,7 +227,7 @@ echo "Creating a clone/mod of es-theme-carbon theme, so we can have GeForce NOW 
 cp -r /usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
 echo ""
 # Define the persistent theme directory
-THEME_DIR="/userdata/themes/es-theme-carbon-gfn"
+THEME_DIR="/batocera/userdata/themes/es-theme-carbon-gfn"
 # Define target directories and URLs
 declare -A files=(
     ["$THEME_DIR/art/logos/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png"
