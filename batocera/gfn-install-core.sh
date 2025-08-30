@@ -216,24 +216,45 @@ cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow
 echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 
 # Define the persistent theme directory for ES-THEME-CARBON
-THEME_DIR="/batocera/userdata/system/etc/emulationstation/themes/es-theme-carbon"
-# Create the necessary persistent directories first..Although it should exist already
-#mkdir -p "$THEME_DIR"
-#mkdir -p "$THEME_DIR/art/logos"
-#mkdir -p "$THEME_DIR/art/background"
-#mkdir -p "$THEME_DIR/art/controllers"
-#mkdir -p "$THEME_DIR/art/consoles"
-
+#THEME_DIR="/batocera/userdata/system/etc/emulationstation/themes/es-theme-carbon"
 # Download images to the persistent directories
-curl -sL -o "$THEME_DIR/art/logos/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
-curl -sL -o "$THEME_DIR/art/background/geforcenow.jpg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
-curl -sL -o "$THEME_DIR/art/controllers/geforcenow.svg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
-curl -sL -o "$THEME_DIR/art/consoles/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
-#curl -sL -o /batocera/usr/art/logos/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
-#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow.jpg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
-#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow.svg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
-#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/consoles/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
-#
+#curl -sL -o "$THEME_DIR/art/logos/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
+#curl -sL -o "$THEME_DIR/art/background/geforcenow.jpg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
+#curl -sL -o "$THEME_DIR/art/controllers/geforcenow.svg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
+#curl -sL -o "$THEME_DIR/art/consoles/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
+
+# Define the persistent theme directory
+THEME_DIR="/batocera/userdata/system/etc/emulationstation/themes/es-theme-carbon"
+
+# Define target directories and URLs
+declare -A files=(
+    ["$THEME_DIR/art/logos/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png"
+    ["$THEME_DIR/art/background/geforcenow.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg"
+    ["$THEME_DIR/art/controllers/geforcenow.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg"
+    ["$THEME_DIR/art/consoles/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png"
+)
+
+# Loop through the files, create directories, and download
+for dest in "${!files[@]}"; do
+    url="${files[$dest]}"
+    dir=$(dirname "$dest")
+
+    echo "Ensuring directory exists: $dir"
+    mkdir -p "$dir"
+    
+    echo "Downloading to: $dest"
+    curl -sL -o "$dest" "$url"
+
+    # Verify download and report status
+    if [ $? -eq 0 ]; then
+        echo "✅ Success."
+    else
+        echo "🚨 Error: Failed to download from $url"
+        # Optional: exit the script if a download fails
+        # exit 1
+    fi
+done
+
 # We give permission to the script that should be used in the main menu
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 echo "🎉 Installation complete! Now you can launch the Official GeForce NOW App from Batocera's main menu (ES-DE)"
