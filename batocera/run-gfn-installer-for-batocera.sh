@@ -21,7 +21,7 @@ echo "Then select the option 'Install/Update Arch Container' and click OK"
 echo ""
 echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
 echo ""
-sleep 10
+sleep 2
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
