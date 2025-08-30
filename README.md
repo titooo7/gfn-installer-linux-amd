@@ -29,6 +29,18 @@ This script automates the installation and applies the necessary configurations 
 
 -----
 
+## Script Actions
+
+The installer performs the following steps:
+
+1.  **Install Application:** Installs the official GeForce NOW application and its dependencies using Flatpak.
+2.  **Configure Flatpak Overrides:** Sets necessary permissions for the application sandbox and disables the Wayland socket `(--nosocket=wayland)` to ensure compatibility on CachyOS or Batocera.
+3.  **Create Custom Launcher:** Creates a bash script at `$HOME/.local/bin/geforce-now-launcher.sh` which starts the application with the required arguments.
+4.  **Modify Desktop Entries:** Updates the `Exec` line in the `.desktop` files for both the application menu and the desktop to point to the new launcher script.
+5.  **Set Shortcut Permissions:** Makes the desktop shortcut executable using `gio set` (for GNOME/Cinnamon) or `chmod +x` (for KDE/XFCE/Other).
+
+-----
+
 ## Requirements
 
   * An Arch-based Linux distribution such as CachyOS.
@@ -41,23 +53,11 @@ This script automates the installation and applies the necessary configurations 
 
 ### Tested Hardware
 
-This script was successfully tested on a system with the following specifications, which confirmed 4K 60FPS streaming capability on a compatible display.
+Successfully tested on a system with the following specifications, which confirmed upto 4K 90FPS streaming capability on 1080p monitor and a 4K TV.
 
   * **Device:** Chuwi Aubox mini-pc running CachyOS
   * **CPU:** AMD Ryzen 7 8845HS
   * **GPU:** AMD Radeon 780M (iGPU)
-
------
-
-## Script Actions
-
-The installer performs the following steps:
-
-1.  **Install Application:** Installs the official GeForce NOW application and its dependencies using Flatpak.
-2.  **Configure Flatpak Overrides:** Sets necessary permissions for the application sandbox and disables the Wayland socket `(--nosocket=wayland)` to ensure compatibility on CachyOS or Batocera.
-3.  **Create Custom Launcher:** Creates a bash script at `$HOME/.local/bin/geforce-now-launcher.sh` which starts the application with the required arguments.
-4.  **Modify Desktop Entries:** Updates the `Exec` line in the `.desktop` files for both the application menu and the desktop to point to the new launcher script.
-5.  **Set Shortcut Permissions:** Makes the desktop shortcut executable using `gio set` (for GNOME/Cinnamon) or `chmod +x` (for KDE/XFCE/Other).
 
 -----
 
