@@ -63,33 +63,24 @@ Successfully tested on a system with the following specifications, which confirm
 
 ## Installation for CachyOS
 
-### Option 1: Execute Directly
-
-This command downloads and executes the script without saving it locally.
+Open a Terminal app and copy and paste the following command:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh | bash
 ```
 
-### Option 2: Download and Run Manually
-
-```bash
-curl -L -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh
-chmod +x install-gfn.sh
-./install-gfn.sh
-```
-
-After the script completes, launch GeForce NOW from your application menu or desktop shortcut.
-
 -----
+
 ## Installation for BATOCERA
 
-This command downloads and executes the script without saving it locally.
+Connect to your Batocera via SSH or launch a Terminal app in Batocera, then copy and paste the following command:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/run-gfn-installer-for-batocera.sh | bash
 ```
-## Uninstallation
+
+-----
+## Uninstallation (CachyOS)
 
 To remove the application and all related files created by this script, execute the following commands in your terminal:
 
@@ -106,6 +97,11 @@ rm -f "$HOME/.local/share/applications/com.nvidia.geforcenow.desktop"
 # Remove the desktop shortcut
 rm -f "$HOME/Desktop/com.nvidia.geforcenow.desktop"
 ```
+
+-----
+## Uninstallation (Batocera)
+
+To remove the application and all related files created by this script, execute the following commands in your terminal:
 
 -----
 
