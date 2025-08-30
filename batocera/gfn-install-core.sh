@@ -182,15 +182,18 @@ echo ""
 echo "------------------------------------------------------------------"
 echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main menu?"
 echo "This requires ~170MB of space. Continue? (Y/N)"
+echo ""
 
-# Read user input directly from the terminal
+# Read user input directly from the terminal, clean it, and convert to uppercase
 read -r -p "Your choice: " yn < /dev/tty
+yn_clean=$(echo "$yn" | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]')
 
-case "$yn" in
-    [Yy]* ) 
+case "$yn_clean" in
+    Y ) 
         echo "👍 OK, proceeding with the main menu setup..."
+        # Place all the code for the main menu setup here
         ;;
-    [Nn]* ) 
+    N ) 
         echo "❌ Exiting installer as requested."
         exit 0
         ;;
