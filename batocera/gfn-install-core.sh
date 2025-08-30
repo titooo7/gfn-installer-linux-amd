@@ -181,16 +181,24 @@ echo ""
  # --- Optional: Create Main Menu Entry ---
 echo "------------------------------------------------------------------"
 echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main menu?"
-echo "Please note that this requires making a copy of the es-theme-carbon theme"
-echo "and will use approximately 170MB of space."
-echo ""
-echo "------------------------------------------------------------------"
-# Add user prompt
-read -p "Do you want to proceed? (Y/N): " response
-if [[ ! "$response" =~ ^[Yy]$ ]]; then
-    echo "Skipping main menu setup. Exiting."
-    exit 0
-fi
+echo "This requires ~170MB of space. Continue? (Y/N)"
+
+# Read user input directly from the terminal
+read -r -p "Your choice: " yn < /dev/tty
+
+case "$yn" in
+    [Yy]* ) 
+        echo "👍 OK, proceeding with the main menu setup..."
+        ;;
+    [Nn]* ) 
+        echo "❌ Exiting installer as requested."
+        exit 0
+        ;;
+    * ) 
+        echo "⚠️ Invalid response. Please rerun the script and answer Y or N."
+        exit 1
+        ;;
+esac
 echo "👍 OK, proceeding with the main menu setup..."
 echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
