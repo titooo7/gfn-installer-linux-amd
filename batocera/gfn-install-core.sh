@@ -213,6 +213,7 @@ mkdir -p /userdata/roms/geforcenow
 cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow/"
 #
 # The next ones are just to download the images and logos for the Geforce Now entry in ES-DE main menu
+echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
 curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow.jpg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
 curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow.svg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
