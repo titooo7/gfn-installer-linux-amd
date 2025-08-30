@@ -224,8 +224,7 @@ echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 #curl -sL -o "$THEME_DIR/art/consoles/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
 
 # Define the persistent theme directory
-THEME_DIR="/batocera/userdata/system/etc/emulationstation/themes/es-theme-carbon"
-
+THEME_DIR="/userdata/themes/es-theme-carbon"
 # Define target directories and URLs
 declare -A files=(
     ["$THEME_DIR/art/logos/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png"
