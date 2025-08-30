@@ -216,7 +216,7 @@ cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow
 echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 
 # Define the persistent theme directory for ES-THEME-CARBON
-THEME_DIR="/userdata/themes/es-theme-carbon"
+THEME_DIR="/userdata/system/etc/emulationstation/themes/es-theme-carbon"
 # Create the necessary persistent directories first
 mkdir -p "$THEME_DIR"
 mkdir -p "$THEME_DIR/art/logos"
