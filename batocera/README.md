@@ -43,19 +43,16 @@ The installer performs the following steps:
 
 ## Requirements
 
-  * An Arch-based Linux distribution such as CachyOS, or a Linux system like Batocera v41.
-      * *Note: While the script may function on any Linux distribution that uses Flatpak, it has only been verified on CachyOS & Batocera.
+  * Batocera v41.
+      * *Note: It hasn't been tested on older Batocera versions
   * An AMD GPU (integrated or dedicated).
-  * **Flatpak** must be installed and configured. To install it on Arch-based systems:
-    ```bash
-    sudo pacman -S flatpak
-    ```
+  * **Batocera Profork** must be installed and you must install Profork's Multi-App Arch Container.
 
 ### Tested Hardware
 
 Successfully tested on a system with the following specifications, which confirmed upto 4K 90FPS streaming capability on 1080p monitor and a 4K TV.
 
-  * **Device:** Chuwi Aubox mini-pc running CachyOS & Batocera
+  * **Device:** Chuwi Aubox mini-pc running Batocera v41
   * **CPU:** AMD Ryzen 7 8845HS
   * **GPU:** AMD Radeon 780M (iGPU)
 
@@ -63,7 +60,7 @@ Successfully tested on a system with the following specifications, which confirm
 
 ## Installation for BATOCERA
 
-Connect to your Batocera via SSH or launch a Terminal app in Batocera, then copy and paste the following command:
+If your device meets the requirements mentioned above, connect to your Batocera via SSH or launch a Terminal app in Batocera, then copy and paste the following command:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/run-gfn-installer-for-batocera.sh | bash
