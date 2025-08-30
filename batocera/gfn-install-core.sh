@@ -178,30 +178,31 @@ echo ""
 echo "👌 You can now launch MATE or XCFE, and from there launch GeForce NOW (using the desktop icon or the one in MATE/XCFE application menu)."
 echo ""
 echo ""
- # --- Optional: Create Main Menu Entry ---
+# --- Optional: Create Main Menu Entry ---
 echo "------------------------------------------------------------------"
 echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main menu?"
-echo "This requires ~170MB of space. Continue? (Y/N)"
+echo "Please note that this requires making a copy of the es-theme-carbon theme"
+echo "and will use approximately 170MB of space."
 echo ""
 
-# Read user input directly from the terminal, clean it, and convert to uppercase
-read -r -p "Your choice: " yn < /dev/tty
-yn_clean=$(echo "$yn" | tr -d '[:space:]' | tr '[:lower:]' '[:upper:]')
-
-case "$yn_clean" in
-    Y ) 
-        echo "👍 OK, proceeding with the main menu setup..."
-        # Place all the code for the main menu setup here
-        ;;
-    N ) 
-        echo "❌ Exiting installer as requested."
+# Read user input with validation (this is the key part that fixes your issue)
+while true; do
+    read -p "Do you want to proceed? (Y/n): " response < /dev/tty
+    response=${response,,}
+    
+    if [[ "$response" == "n" || "$response" == "no" ]]; then
+        echo "Exiting script as requested."
         exit 0
-        ;;
-    * ) 
-        echo "⚠️ Invalid response. Please rerun the script and answer Y or N."
-        exit 1
-        ;;
-esac
+    elif [[ -z "$response" || "$response" == "y" || "$response" == "yes" ]]; then
+        break
+    else
+        echo "Invalid response. Please enter Y or N."
+    fi
+done
+
+echo "👍 OK, proceeding with the main menu setup..."
+echo ""
+# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 echo "👍 OK, proceeding with the main menu setup..."
 echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
