@@ -216,7 +216,7 @@ cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow
 echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 
 # Define the persistent theme directory for ES-THEME-CARBON
-THEME_DIR="/home/root/etc/emulationstation/themes/es-theme-carbon"
+THEME_DIR="/home/batocera/etc/emulationstation/themes/es-theme-carbon"
 # Create the necessary persistent directories first..Although it should exist already
 mkdir -p "$THEME_DIR"
 mkdir -p "$THEME_DIR/art/logos"
