@@ -218,11 +218,11 @@ echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 # Define the persistent theme directory for ES-THEME-CARBON
 THEME_DIR="/batocera/userdata/system/etc/emulationstation/themes/es-theme-carbon"
 # Create the necessary persistent directories first..Although it should exist already
-mkdir -p "$THEME_DIR"
-mkdir -p "$THEME_DIR/art/logos"
-mkdir -p "$THEME_DIR/art/background"
-mkdir -p "$THEME_DIR/art/controllers"
-mkdir -p "$THEME_DIR/art/consoles"
+#mkdir -p "$THEME_DIR"
+#mkdir -p "$THEME_DIR/art/logos"
+#mkdir -p "$THEME_DIR/art/background"
+#mkdir -p "$THEME_DIR/art/controllers"
+#mkdir -p "$THEME_DIR/art/consoles"
 
 # Download images to the persistent directories
 curl -sL -o "$THEME_DIR/art/logos/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
