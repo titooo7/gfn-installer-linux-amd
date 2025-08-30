@@ -212,12 +212,27 @@ mkdir -p /userdata/roms/geforcenow
 # 
 cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow/"
 #
-# The next ones are just to download the images and logos for the Geforce Now entry in ES-DE main menu
+# The last lines are just to download the images and logos for the Geforce Now entry in ES-DE main menu
 echo "Downloading images for GeForce NOW entry in ES-DE main menu"
-curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
-curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow.jpg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
-curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow.svg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
-curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/consoles/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
+
+# Define the persistent theme directory for ES-THEME-CARBON
+THEME_DIR="/userdata/themes/es-theme-carbon"
+# Create the necessary persistent directories first
+mkdir -p "$THEME_DIR"
+mkdir -p "$THEME_DIR/art/logos"
+mkdir -p "$THEME_DIR/art/background"
+mkdir -p "$THEME_DIR/art/controllers"
+mkdir -p "$THEME_DIR/art/consoles"
+
+# Download images to the persistent directories
+curl -sL -o "$THEME_DIR/art/logos/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
+curl -sL -o "$THEME_DIR/art/background/geforcenow.jpg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
+curl -sL -o "$THEME_DIR/art/controllers/geforcenow.svg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
+curl -sL -o "$THEME_DIR/art/consoles/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
+#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/logos/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
+#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/background/geforcenow.jpg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
+#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/controllers/geforcenow.svg https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
+#curl -sL -o /batocera/usr/share/emulationstation/themes/es-theme-carbon/art/consoles/geforcenow.png https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
 #
 # We give permission to the script that should be used in the main menu
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
