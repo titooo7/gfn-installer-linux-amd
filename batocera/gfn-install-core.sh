@@ -184,11 +184,16 @@ echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main
 echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
+# Ask the user
 read -p "Proceed? (Y = Yes, N = No to finish installation): " create_menu_entry < /dev/tty || true
 
-# Trim whitespace and carriage returns, force uppercase
-create_menu_entry=$(echo "$create_menu_entry" | tr -d '\r' | xargs | tr '[:lower:]' '[:upper:]')
+# Normalize input:
+# - strip carriage returns/newlines
+# - strip leading/trailing spaces
+# - force uppercase
+create_menu_entry=$(echo "$create_menu_entry" | tr -d '\r\n' | xargs | tr '[:lower:]' '[:upper:]')
 
+# Decide based on cleaned input
 if [[ "$create_menu_entry" == "Y" ]]; then
     echo "Creating menu entry..."
 else
