@@ -178,36 +178,51 @@ echo ""
 echo "👌 You can now launch MATE or XCFE, and from there launch GeForce NOW (using the desktop icon or the one in MATE/XCFE application menu)."
 echo ""
 echo ""
-# --- Optional: Create Main Menu Entry ---
+ # --- Optional: Create Main Menu Entry ---
 echo "------------------------------------------------------------------"
 echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main menu?"
 echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# Prompt for user input with Y/N confirmation
-read -p "Do you want to proceed? (Y/N): " response
-response=${response^^}  # Convert to uppercase for case-insensitive comparison
+# Disable set -e temporarily for the read command
+set +e
 
-# Check user response
-if [[ "$response" == "N" ]]; then
-    echo "Exiting script as per user request."
-    exit 0
-elif [[ "$response" != "Y" ]]; then
-    echo "Invalid input. Please enter Y or N."
+# Check if we're in an interactive shell
+if [ -t 0 ]; then
     read -p "Do you want to proceed? (Y/N): " response
-    response=${response^^}
+    response=${response^^}  # Convert to uppercase for case-insensitive comparison
     
+    # Check user response
     if [[ "$response" == "N" ]]; then
         echo "Exiting script as per user request."
         exit 0
     elif [[ "$response" != "Y" ]]; then
-        echo "Invalid input again. Exiting script."
-        exit 1
+        echo "Invalid input. Please enter Y or N."
+        read -p "Do you want to proceed? (Y/N): " response
+        response=${response^^}
+        
+        if [[ "$response" == "N" ]]; then
+            echo "Exiting script as per user request."
+            exit 0
+        elif [[ "$response" != "Y" ]]; then
+            echo "Invalid input again. Exiting script."
+            exit 1
+        fi
     fi
+else
+    echo "Non-interactive environment detected. Proceeding with default action (Y)."
+    response="Y"
 fi
 
+# Re-enable set -e if needed
+set -e
+
 echo "👍 OK, proceeding with the main menu setup..."
+echo ""
+# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
+
+ 
 echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 echo ""
