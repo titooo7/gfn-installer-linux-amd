@@ -185,24 +185,31 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# Ask user for confirmation
-read -p "Do you want to continue? (Y/N): " answer
+# Prompt for user input with Y/N confirmation
+read -p "Do you want to proceed? (Y/N): " response
+response=${response^^}  # Convert to uppercase for case-insensitive comparison
 
-case "$answer" in
-    [Yy]* )
-        echo "👍 OK, proceeding with the main menu setup..."
-        ;;
-    [Nn]* )
-        echo "❌ Installation aborted by user."
+# Check user response
+if [[ "$response" == "N" ]]; then
+    echo "Exiting script as per user request."
+    exit 0
+elif [[ "$response" != "Y" ]]; then
+    echo "Invalid input. Please enter Y or N."
+    read -p "Do you want to proceed? (Y/N): " response
+    response=${response^^}
+    
+    if [[ "$response" == "N" ]]; then
+        echo "Exiting script as per user request."
         exit 0
-        ;;
-    * )
-        echo "⚠️ Invalid input. Please run the script again and answer Y or N."
+    elif [[ "$response" != "Y" ]]; then
+        echo "Invalid input again. Exiting script."
         exit 1
-        ;;
-esac
+    fi
+fi
 
 echo "👍 OK, proceeding with the main menu setup..."
+echo ""
+# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
