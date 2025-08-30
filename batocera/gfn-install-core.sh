@@ -186,11 +186,13 @@ echo "and will use approximately 170MB of space."
 echo ""
 read -p "Proceed? (Y = Yes, N = No to finish installation): " create_menu_entry < /dev/tty || true
 
-echo ""
-# If the user's answer is anything other than 'Y' or 'y', we exit.
-if [[ "$create_menu_entry" != "Y" && "$create_menu_entry" != "y" ]]; then
-    echo "Skipping main menu entry."
-    echo "🎉 Installation complete! You can launch GeForce NOW from the 'Ports' section."
+# Trim whitespace and carriage returns, force uppercase
+create_menu_entry=$(echo "$create_menu_entry" | tr -d '\r' | xargs | tr '[:lower:]' '[:upper:]')
+
+if [[ "$create_menu_entry" == "Y" ]]; then
+    echo "Creating menu entry..."
+else
+    echo "Skipping main menu entry"
     exit 0
 fi
 
