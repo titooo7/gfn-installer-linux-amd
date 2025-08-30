@@ -177,6 +177,8 @@ EOF
 echo "✅ Shortcut for the official GeForce NOW created in Ports section of the main menu."
 echo ""
 echo "👌 You can now launch MATE or XCFE, and from there launch GeForce NOW (using the desktop icon or the one in MATE/XCFE application menu)."
+echo ""
+echo ""
 # TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
 <?xml version="1.0"?>
