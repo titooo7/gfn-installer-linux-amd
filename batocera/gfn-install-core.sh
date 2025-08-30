@@ -193,10 +193,11 @@ while true; do
     response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
     
     if [[ "$response_lower" =~ ^(n|no)$ ]]; then
-        echo "Exiting script as requested."
+        echo "👍 Oook, we are done then!"
+        echo "Now you can launch GeForce NOW from the Ports section of the main menu"
         exit 0
     elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
-        echo "👍 OK, proceeding with the main menu setup..."
+        echo "👍 OK, creating a nice GeForce NOE entry with the main menu setup..."
         echo ""
         break
     else
