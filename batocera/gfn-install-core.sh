@@ -154,7 +154,7 @@ cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
 #------------------------------------------------
 conty=/userdata/system/pro/steam/conty.sh
 #------------------------------------------------
-batocera-mouse show
+#batocera-mouse show
 DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
 
 # Execute the script inside the container using MATE's fish shell
