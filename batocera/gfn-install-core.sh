@@ -288,4 +288,5 @@ done
 echo "✅ You can now select ES-THEME-CARBON-GFN in the User Interface Settings"
 # We give permission to the script that should be used in the main menu
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
+echo ""
 echo "🎉 Installation complete! Now you can launch the Official GeForce NOW App from Batocera's main menu (ES-DE)"
