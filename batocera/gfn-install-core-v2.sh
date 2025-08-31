@@ -132,7 +132,21 @@ case "$XDG_CURRENT_DESKTOP" in
 esac
 echo "✅ Both shortcuts are now ready to launch."
 echo ""
-echo "8. Creating shortcut for EmulationStation (Ports)..."
+
+# --- Optional: Create Main Menu Entry ---
+echo "------------------------------------------------------------------"
+echo "🛑 Would you like to create a dedicated GeForce NOW entry in Batocera's main menu?"
+echo "This requires copying a theme and will use approximately 170MB of space."
+echo ""
+
+# Read user input with validation.
+while true; do
+    read -p "Do you want to proceed? (Y/n): " response < /dev/tty
+    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+    
+    if [[ "$response_lower" =~ ^(n|no)$ ]]; then
+        echo "👍 Skipping main menu entry. Adding a shortcut to Ports section"
+        echo "8. Creating shortcut for EmulationStation (Ports)..."
 cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
@@ -154,26 +168,12 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
         --bind /userdata /userdata \
         --bind /newroot /newroot \
         --bind / /batocera \
-fish -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
+bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 echo "✅ Shortcut for GeForce NOW created in the Ports section."
 echo ""
 echo "👌 You can now launch GeForce NOW from the MATE/XFCE desktop or from the Ports menu in EmulationStation."
 echo ""
-
-# --- Optional: Create Main Menu Entry ---
-echo "------------------------------------------------------------------"
-echo "🛑 Would you like to create a dedicated GeForce NOW entry in Batocera's main menu?"
-echo "This requires copying a theme and will use approximately 170MB of space."
-echo ""
-
-# Read user input with validation.
-while true; do
-    read -p "Do you want to proceed? (Y/n): " response < /dev/tty
-    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
-    
-    if [[ "$response_lower" =~ ^(n|no)$ ]]; then
-        echo "👍 Skipping main menu entry. Setup is complete!"
         exit 0
     elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
         echo "👍 OK, creating the main menu entry..."
@@ -210,10 +210,33 @@ cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
 </systemList>
 EOF
 
+cat > "/userdata/roms/geforcenow/Official GeForce NOW App.sh" << 'EOF'
+#!/bin/bash
+
+# Path to conty runner
+conty=/userdata/system/pro/steam/conty.sh
+DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
+
+# Execute the launcher inside the appropriate container environment.
+"$conty" \
+        --bind /userdata/system/containers/storage /var/lib/containers/storage \
+        --bind /userdata/system/flatpak /var/lib/flatpak \
+        --bind /userdata/system/etc/passwd /etc/passwd \
+        --bind /userdata/system/etc/group /etc/group \
+        --bind /var/run/nvidia /run/nvidia \
+        --bind /userdata/system /home/batocera \
+        --bind /sys/fs/cgroup /sys/fs/cgroup \
+        --bind /userdata/system /home/root \
+        --bind /etc/fonts /etc/fonts \
+        --bind /userdata /userdata \
+        --bind /newroot /newroot \
+        --bind / /batocera \
+bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
+EOF
+
+chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 echo "Setting up ROMS directory and launch script..."
 mkdir -p /userdata/roms/geforcenow
-cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow/"
-chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 
 echo "Cloning theme for main menu integration..."
 cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
