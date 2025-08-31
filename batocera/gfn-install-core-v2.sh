@@ -216,7 +216,7 @@ cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
 
 echo "Cloning theme for main menu integration..."
-cp -r /usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
+cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
 echo ""
 
 # Define theme directory and required image assets.
