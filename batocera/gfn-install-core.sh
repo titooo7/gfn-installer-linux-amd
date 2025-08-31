@@ -185,49 +185,55 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# ULTIMATE FIX FOR TERMINAL BUFFER ISSUES
-echo "Clearing terminal buffer... Please wait."
-# Method 1: Flush any pending input
-while IFS= read -r -t 0.1 -n 10000 discard; do :; done
+# ULTIMATE SOLUTION THAT WORKS IN BATOCERA
+echo "Preparing clean input prompt..."
+sleep 0.3  # Give terminal time to settle
 
-# Method 2: Reset terminal settings
-if command -v stty &> /dev/null; then
-    stty -icanon min 1 time 0  # Set non-canonical mode with immediate return
-    while IFS= read -r -n 1 -t 0.1 discard; do :; done  # Read single chars
-    stty icanon  # Restore canonical mode
+# Function to read a single clean character (ignores ANSI escape sequences)
+read_clean_char() {
+    local char
+    
+    while true; do
+        # Read one character at a time
+        IFS= read -r -n 1 -t 1 char < /dev/tty || true
+        
+        # If empty (timeout), continue waiting
+        [ -z "$char" ] && continue
+        
+        # Check for escape sequences (start with ESC: \e or 0x1b)
+        if [ "$(printf '%d' "'$char")" -eq 27 ]; then
+            # Read and discard the rest of the escape sequence
+            while IFS= read -r -n 1 -t 0.1 next_char < /dev/tty; do
+                [ -z "$next_char" ] && break
+            done
+            continue
+        fi
+        
+        # Return the clean character
+        echo "$char"
+        return 0
+    done
+}
+
+# Now prompt for input
+echo -n "Do you want to proceed? (Y/n): "
+response=$(read_clean_char)
+echo "$response"  # Echo the response to simulate normal input behavior
+
+# Process the single character response
+response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+
+if [[ "$response_lower" == "n" ]]; then
+    echo "Exiting script as requested."
+    exit 0
+elif [[ "$response_lower" == "y" || -z "$response_lower" ]]; then
+    echo "👍 OK, proceeding with the main menu setup..."
+    echo ""
+else
+    echo "Invalid response. Defaulting to 'Y' for safety."
+    echo "👍 OK, proceeding with the main menu setup..."
+    echo ""
 fi
-
-# Method 3: Final buffer clear using direct terminal access
-exec < /dev/tty  # Reset stdin to terminal
-
-# Give terminal time to fully reset
-sleep 0.5
-
-# Now prompt for input - THIS WILL WORK ON FIRST TRY
-while true; do
-    read -r -p "Do you want to proceed? (Y/n): " response < /dev/tty
-    
-    # Convert to lowercase and trim whitespace
-    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]' | xargs)
-    
-    # Handle empty input as "y"
-    if [ -z "$response_lower" ]; then
-        response_lower="y"
-    fi
-    
-    if [[ "$response_lower" == "y" || "$response_lower" == "yes" ]]; then
-        echo "👍 OK, proceeding with the main menu setup..."
-        echo ""
-        break
-    elif [[ "$response_lower" == "n" || "$response_lower" == "no" ]]; then
-        echo "Exiting script as requested."
-        exit 0
-    else
-        echo "Invalid response. Please enter Y or N."
-    fi
-done
-
-# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 
 # TODO: TRYING TO LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 # WITH ALL THE CODE LISTED BELOW IT ADDS THE ENTRY TO THE MAIN MENU, BUT UPON CLICKING ON IT OT OPENS A WINDOW WHERE THE SCRIPT IS LOCATED
