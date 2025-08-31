@@ -184,56 +184,27 @@ echo "🛑 Would you like to have a GeForce NOW entry in Batocera's (ES-DE) main
 echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
+echo "You'll be asked to confirm your choice twice"
 
-# ULTIMATE SOLUTION THAT WORKS IN BATOCERA
-echo "Preparing clean input prompt..."
-sleep 0.3  # Give terminal time to settle
-
-# Function to read a single clean character (ignores ANSI escape sequences)
-read_clean_char() {
-    local char
+# Read user input with validation (case-insensitive)
+while true; do
+    read -p "Do you want to proceed? (Y/n): " response < /dev/tty
     
-    while true; do
-        # Read one character at a time
-        IFS= read -r -n 1 -t 1 char < /dev/tty || true
-        
-        # If empty (timeout), continue waiting
-        [ -z "$char" ] && continue
-        
-        # Check for escape sequences (start with ESC: \e or 0x1b)
-        if [ "$(printf '%d' "'$char")" -eq 27 ]; then
-            # Read and discard the rest of the escape sequence
-            while IFS= read -r -n 1 -t 0.1 next_char < /dev/tty; do
-                [ -z "$next_char" ] && break
-            done
-            continue
-        fi
-        
-        # Return the clean character
-        echo "$char"
-        return 0
-    done
-}
-
-# Now prompt for input
-echo -n "Do you want to proceed? (Y/n): "
-response=$(read_clean_char)
-echo "$response"  # Echo the response to simulate normal input behavior
-
-# Process the single character response
-response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
-
-if [[ "$response_lower" == "n" ]]; then
-    echo "Exiting script as requested."
-    exit 0
-elif [[ "$response_lower" == "y" || -z "$response_lower" ]]; then
-    echo "👍 OK, proceeding with the main menu setup..."
-    echo ""
-else
-    echo "Invalid response. Defaulting to 'Y' for safety."
-    echo "👍 OK, proceeding with the main menu setup..."
-    echo ""
-fi
+    # Convert to lowercase for case-insensitive comparison
+    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+    
+    if [[ "$response_lower" =~ ^(n|no)$ ]]; then
+        echo "👍 Oook, we are done then!"
+        echo "Now you can launch GeForce NOW from the Ports section of the main menu"
+        exit 0
+    elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
+        echo "👍 OK, creating a nice GeForce NOE entry with the main menu setup..."
+        echo ""
+        break
+    else
+        echo "Invalid response. Please enter Y or N."
+    fi
+done
 
 # TODO: TRYING TO LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 # WITH ALL THE CODE LISTED BELOW IT ADDS THE ENTRY TO THE MAIN MENU, BUT UPON CLICKING ON IT OT OPENS A WINDOW WHERE THE SCRIPT IS LOCATED
