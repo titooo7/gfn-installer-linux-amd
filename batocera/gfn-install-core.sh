@@ -185,18 +185,27 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# Read user input with validation (case-insensitive and whitespace-tolerant)
+# Read user input with validation (handles all edge cases)
 while true; do
-    read -p "Do you want to proceed? (Y/n): " response < /dev/tty
+    # -r prevents backslash interpretation, < /dev/tty ensures we read from terminal
+    read -r -p "Do you want to proceed? (Y/n): " response < /dev/tty
     
-    # Trim whitespace and convert to lowercase
-    trimmed_response=$(echo "$response" | tr '[:upper:]' '[:lower:]' | xargs)
+    # Remove carriage returns and trim whitespace using pure bash (no external commands)
+    cleaned_response="${response//$'\r'/}"        # Remove carriage returns
+    cleaned_response="${cleaned_response#"${cleaned_response%%[![:space:]]*}"}"  # Trim leading whitespace
+    cleaned_response="${cleaned_response%"${cleaned_response##*[![:space:]]}"}"  # Trim trailing whitespace
+    cleaned_response="${cleaned_response,,}"      # Convert to lowercase (Bash 4+)
     
-    if [[ -z "$trimmed_response" || "$trimmed_response" =~ ^(y|yes)$ ]]; then
+    # If response is empty, treat as "y"
+    if [ -z "$cleaned_response" ]; then
+        cleaned_response="y"
+    fi
+    
+    if [[ "$cleaned_response" == "y" || "$cleaned_response" == "yes" ]]; then
         echo "👍 OK, proceeding with the main menu setup..."
         echo ""
         break
-    elif [[ "$trimmed_response" =~ ^(n|no)$ ]]; then
+    elif [[ "$cleaned_response" == "n" || "$cleaned_response" == "no" ]]; then
         echo "Exiting script as requested."
         exit 0
     else
