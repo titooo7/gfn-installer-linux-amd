@@ -209,7 +209,7 @@ cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
   </system>
 </systemList>
 EOF
-
+mkdir -p /userdata/roms/geforcenow
 cat > "/userdata/roms/geforcenow/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
