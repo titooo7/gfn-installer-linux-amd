@@ -172,7 +172,7 @@ bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 echo "✅ Shortcut for GeForce NOW created in the Ports section."
 echo ""
-echo "👌 You can now launch GeForce NOW from the MATE/XFCE desktop or from the Ports menu in EmulationStation."
+echo "🎉 You can now launch GeForce NOW from the MATE/XFCE desktop or from the Ports menu in EmulationStation."
 echo ""
         exit 0
     elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
@@ -209,6 +209,7 @@ cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
   </system>
 </systemList>
 EOF
+echo "Setting up everything to have the launch script in the main menu..."
 mkdir -p /userdata/roms/geforcenow
 cat > "/userdata/roms/geforcenow/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
@@ -235,8 +236,6 @@ bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 
 chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
-echo "Setting up ROMS directory and launch script..."
-mkdir -p /userdata/roms/geforcenow
 
 echo "Cloning theme for main menu integration..."
 cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
@@ -266,7 +265,7 @@ for dest in "${!files[@]}"; do
 done
 
 echo ""
-echo "✅ You can now select the 'ES-THEME-CARBON-GFN' theme in UI Settings."
+echo "✅ Go to settings / User Interfaces and select the theme 'ES-THEME-CARBON-GFN'."
 echo ""
-echo "🎉 Installation complete! GeForce NOW is now available in the Batocera main menu."
+echo "🎉 GeForce NOW is now available in the Batocera main menu."
 
