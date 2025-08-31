@@ -185,55 +185,29 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# Read user input with detailed diagnostics
+# CRITICAL FIX: Flush terminal buffer before reading input
+# This clears any pending ANSI escape codes from previous commands
+echo "Flushing terminal buffer... Please wait a moment."
+sleep 0.3  # Give terminal time to settle
+exec < /dev/tty  # Reset stdin to terminal
+
+# Now read user input with proper buffer clearing
 while true; do
-    # Show what's about to happen
-    echo -n "DEBUG: Waiting for input from terminal... "
     read -r -p "Do you want to proceed? (Y/n): " response < /dev/tty
-    echo "DEBUG: Input received"
     
-    # Show raw input in hex format to reveal hidden characters
-    echo "DEBUG: Raw input in hex: $(echo -n "$response" | xxd -p)"
+    # Convert to lowercase
+    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
     
-    # Show each processing step
-    echo "DEBUG: Processing input..."
+    # Trim whitespace
+    response_lower=$(echo "$response_lower" | xargs)
     
-    # Step 1: Remove carriage returns
-    cleaned_response="${response//$'\r'/}"
-    echo "DEBUG: After CR removal: '$cleaned_response' (hex: $(echo -n "$cleaned_response" | xxd -p))"
-    
-    # Step 2: Trim leading whitespace
-    cleaned_response="${cleaned_response#"${cleaned_response%%[![:space:]]*}"}"
-    echo "DEBUG: After leading space trim: '$cleaned_response' (hex: $(echo -n "$cleaned_response" | xxd -p))"
-    
-    # Step 3: Trim trailing whitespace
-    cleaned_response="${cleaned_response%"${cleaned_response##*[![:space:]]}"}"
-    echo "DEBUG: After trailing space trim: '$cleaned_response' (hex: $(echo -n "$cleaned_response" | xxd -p))"
-    
-    # Step 4: Convert to lowercase
-    cleaned_response="${cleaned_response,,}"
-    echo "DEBUG: After lowercase conversion: '$cleaned_response' (hex: $(echo -n "$cleaned_response" | xxd -p))"
-    
-    # Handle empty input
-    if [ -z "$cleaned_response" ]; then
-        echo "DEBUG: Empty input detected, treating as 'y'"
-        cleaned_response="y"
-    fi
-    
-    echo "DEBUG: Final processed input: '$cleaned_response'"
-    
-    # Check what we're matching against
-    echo "DEBUG: Checking against patterns:"
-    echo "DEBUG: - Is it 'y' or 'yes'? [${cleaned_response} =~ ^(y|yes)$]"
-    echo "DEBUG: - Is it 'n' or 'no'? [${cleaned_response} =~ ^(n|no)$]"
-    
-    if [[ "$cleaned_response" == "y" || "$cleaned_response" == "yes" ]]; then
+    if [[ "$response_lower" == "n" || "$response_lower" == "no" ]]; then
+        echo "Exiting script as requested."
+        exit 0
+    elif [[ -z "$response_lower" || "$response_lower" == "y" || "$response_lower" == "yes" ]]; then
         echo "👍 OK, proceeding with the main menu setup..."
         echo ""
         break
-    elif [[ "$cleaned_response" == "n" || "$cleaned_response" == "no" ]]; then
-        echo "Exiting script as requested."
-        exit 0
     else
         echo "Invalid response. Please enter Y or N."
     fi
