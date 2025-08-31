@@ -185,33 +185,49 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# CRITICAL FIX: Flush terminal buffer before reading input
-# This clears any pending ANSI escape codes from previous commands
-echo "Flushing terminal buffer... Please wait a moment."
-sleep 0.3  # Give terminal time to settle
+# ULTIMATE FIX FOR TERMINAL BUFFER ISSUES
+echo "Clearing terminal buffer... Please wait."
+# Method 1: Flush any pending input
+while IFS= read -r -t 0.1 -n 10000 discard; do :; done
+
+# Method 2: Reset terminal settings
+if command -v stty &> /dev/null; then
+    stty -icanon min 1 time 0  # Set non-canonical mode with immediate return
+    while IFS= read -r -n 1 -t 0.1 discard; do :; done  # Read single chars
+    stty icanon  # Restore canonical mode
+fi
+
+# Method 3: Final buffer clear using direct terminal access
 exec < /dev/tty  # Reset stdin to terminal
 
-# Now read user input with proper buffer clearing
+# Give terminal time to fully reset
+sleep 0.5
+
+# Now prompt for input - THIS WILL WORK ON FIRST TRY
 while true; do
     read -r -p "Do you want to proceed? (Y/n): " response < /dev/tty
     
-    # Convert to lowercase
-    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+    # Convert to lowercase and trim whitespace
+    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]' | xargs)
     
-    # Trim whitespace
-    response_lower=$(echo "$response_lower" | xargs)
+    # Handle empty input as "y"
+    if [ -z "$response_lower" ]; then
+        response_lower="y"
+    fi
     
-    if [[ "$response_lower" == "n" || "$response_lower" == "no" ]]; then
-        echo "Exiting script as requested."
-        exit 0
-    elif [[ -z "$response_lower" || "$response_lower" == "y" || "$response_lower" == "yes" ]]; then
+    if [[ "$response_lower" == "y" || "$response_lower" == "yes" ]]; then
         echo "👍 OK, proceeding with the main menu setup..."
         echo ""
         break
+    elif [[ "$response_lower" == "n" || "$response_lower" == "no" ]]; then
+        echo "Exiting script as requested."
+        exit 0
     else
         echo "Invalid response. Please enter Y or N."
     fi
 done
+
+# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 
 # TODO: TRYING TO LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 # WITH ALL THE CODE LISTED BELOW IT ADDS THE ENTRY TO THE MAIN MENU, BUT UPON CLICKING ON IT OT OPENS A WINDOW WHERE THE SCRIPT IS LOCATED
