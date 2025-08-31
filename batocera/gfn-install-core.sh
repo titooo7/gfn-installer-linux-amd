@@ -185,27 +185,28 @@ echo "Please note that this requires making a copy of the es-theme-carbon theme"
 echo "and will use approximately 170MB of space."
 echo ""
 
-# Read user input with validation (case-insensitive)
+# Read user input with validation (case-insensitive and whitespace-tolerant)
 while true; do
     read -p "Do you want to proceed? (Y/n): " response < /dev/tty
     
-    # Convert to lowercase for case-insensitive comparison
-    response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+    # Trim whitespace and convert to lowercase
+    trimmed_response=$(echo "$response" | tr '[:upper:]' '[:lower:]' | xargs)
     
-    if [[ "$response_lower" =~ ^(n|no)$ ]]; then
-        echo "👍 Oook, we are done then!"
-        echo "Now you can launch GeForce NOW from the Ports section of the main menu"
-        exit 0
-    elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
-        echo "👍 OK, creating a nice GeForce NOE entry with the main menu setup..."
+    if [[ -z "$trimmed_response" || "$trimmed_response" =~ ^(y|yes)$ ]]; then
+        echo "👍 OK, proceeding with the main menu setup..."
         echo ""
         break
+    elif [[ "$trimmed_response" =~ ^(n|no)$ ]]; then
+        echo "Exiting script as requested."
+        exit 0
     else
         echo "Invalid response. Please enter Y or N."
     fi
 done
-echo ""
-# TODO: TRYING TO ADD GeForce NOW TO ES-DE MAIN MENU AND LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
+
+# TODO: TRYING TO LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
+# WITH ALL THE CODE LISTED BELOW IT ADDS THE ENTRY TO THE MAIN MENU, BUT UPON CLICKING ON IT OT OPENS A WINDOW WHERE THE SCRIPT IS LOCATED
+# THE DESIRED OUTCOME IS TO LAUNCH GFN DIRECTLY, WITHOUT OPENING ANOTHER WINDOW SHOWING THE SCRIPT FILE
 cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
 <?xml version="1.0"?>
 <systemList>
@@ -246,10 +247,6 @@ echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 # Define the persistent theme directory for ES-THEME-CARBON
 #THEME_DIR="/batocera/userdata/system/etc/emulationstation/themes/es-theme-carbon"
 # Download images to the persistent directories
-#curl -sL -o "$THEME_DIR/art/logos/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png
-#curl -sL -o "$THEME_DIR/art/background/geforcenow.jpg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg
-#curl -sL -o "$THEME_DIR/art/controllers/geforcenow.svg" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg
-#curl -sL -o "$THEME_DIR/art/consoles/geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png
 
 echo "Creating a clone/mod of es-theme-carbon theme, so we can have GeForce NOW in the main menu"
 cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
