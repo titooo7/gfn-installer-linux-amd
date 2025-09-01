@@ -8,20 +8,28 @@ echo ""
 echo "✅ AMD GPU detected. So far, so good."
 echo ""
 echo ""
-echo "🛑 IMPORTANT 🛑"
-echo "Your Batocera build needs to have profork installed in your Batocera one Desktop from Multi-App Arch Container"
-echo ""
-echo "Otherwise the app might get installed but it won't launch"
-echo ""
-echo "Instructions on how to install batocera.pro fork (profork) are at https://github.com/profork/profork"
-echo ""
-echo "Once profork is executed, select the option 'Install Multi-App Arch Container' and click OK"
-echo ""
-echo "Then select the option 'Install/Update Arch Container' and click OK"
-echo ""
-echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
-echo ""
-sleep 2
+
+# Define the file to check
+REQUIRED_FILE="/userdata/system/pro/steam/conty.sh"
+
+# Check if the file doesn't exist or is not executable
+if [ ! -x "$REQUIRED_FILE" ]; then
+    {
+        echo "🛑 IMPORTANT 🛑"
+        echo "You must have profork installed in your Batocera, as well as one Desktop from Multi-App Arch Container"
+        echo ""
+        echo "Instructions on how to install batocera.pro fork (profork) are at https://github.com/profork/profork"
+        echo ""
+        echo "Once profork is executed, select the option 'Install Multi-App Arch Container' and click OK"
+        echo ""
+        echo "Then select the option 'Install/Update Arch Container' and click OK"
+        echo ""
+        echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
+        echo ""
+    } >&2 #<-- Redirect the entire block to stderr
+    exit 1
+fi
+
 echo "Now it's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
@@ -40,10 +48,6 @@ chmod +x "$INSTALLER_SCRIPT_TO_RUN"
 
 # Define the path to conty
 conty=/userdata/system/pro/steam/conty.sh
-if [ ! -x "$conty" ]; then
-    echo "⚠️ ERROR: conty.sh not found at $conty Please make sure to install the Multi-App Arch Container using Profork"
-    exit 1
-fi
 
 # Execute the script inside the container using MATE's fish shell
 "$conty" \
