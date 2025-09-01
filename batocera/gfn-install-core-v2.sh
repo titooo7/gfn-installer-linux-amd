@@ -139,7 +139,7 @@ echo ""
 
 # --- Optional: Create Main Menu Entry ---
 echo "------------------------------------------------------------------"
-echo "🛑 Would you like to create a dedicated GeForce NOW entry in Batocera's main menu?"
+echo "🛑 Would you like to create a dedicated Cloud Gaming in Batocera's main menu?"
 echo "This requires copying a theme and will use approximately 170MB of space."
 echo ""
 
@@ -149,8 +149,8 @@ while true; do
     response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
     
     if [[ "$response_lower" =~ ^(n|no)$ ]]; then
-        echo "👍 Skipping main menu entry. Adding a shortcut to Ports section"
-        echo "8. Creating shortcut for EmulationStation (Ports)..."
+        echo "👍 Skipping main menu entry. Adding  section"
+        echo "8. Creating a GeForce NOW shortcut in the Ports section in EmulationStation..."
 cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
@@ -174,9 +174,11 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
         --bind / /batocera \
 bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
-echo "✅ Shortcut for GeForce NOW created in the Ports section."
+echo "✅ Shortcut for GeForce NOW created in the Ports section"
 echo ""
-echo "🎉 You can now launch GeForce NOW from the MATE/XFCE desktop or from the Ports menu in EmulationStation."
+echo "🎉 You can now launch GeForce NOW from Ports (Batocera's main menu)."
+echo "Alternatively you can press F1 from the main menu, run LXDE/MATE/XFCE desktops and launch it from there."
+
 echo ""
         exit 0
     elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
@@ -213,7 +215,7 @@ cat > "/userdata/system/configs/emulationstation/es_systems_cloudgaming.cfg" << 
   </system>
 </systemList>
 EOF
-echo "Setting up everything to have the launch script in the main menu..."
+echo "Adding the GeForce NOW script to 'Cloud Gaming' in the main menu..."
 mkdir -p /userdata/roms/cloudgaming
 cat > "/userdata/roms/cloudgaming/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
@@ -243,12 +245,12 @@ EOF
 
 chmod +x "/userdata/roms/cloudgaming/Official GeForce NOW App.sh"
 
-echo "Cloning theme for main menu integration..."
+echo "Creating the ES-THEME-CARBON-CLOUDGAMING theme for main menu integration..."
 cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-cloudgaming
 echo ""
 
 # Define theme directory and required image assets.
-THEME_DIR="/userdata/themes/es-theme-carbon-cloudfaming"
+THEME_DIR="/userdata/themes/es-theme-carbon-cloudgaming"
 declare -A files=(
     ["$THEME_DIR/art/logos/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/cloudgaming.png"
     ["$THEME_DIR/art/background/cloudgaming.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/cloudgaming.jpg"
@@ -273,7 +275,7 @@ echo ""
 echo "ℹ️ If you already installed Amazon Luna or Xcloud we added a symlink in Cloud Gaming."
 ln -sf /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/cloudgaming/
 echo ""
-echo "✅ Go to settings / User Interfaces and select the theme 'ES-THEME-CARBON-GFN'."
+echo "✅ Go to Gettings / User Interfaces and select the theme 'ES-THEME-CARBON-CLOUDGAMING'."
 echo ""
-echo "🎉 GeForce NOW is now available in the Batocera main menu."
+echo "🎉 You can go to Cloud Gaming in Batocera's main menu and launch GeForce NOW."
 
