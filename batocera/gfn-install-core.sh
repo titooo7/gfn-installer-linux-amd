@@ -42,8 +42,8 @@ curl -sL -o "$USER_HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.gefor
 echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
 echo ""
 echo "4. Applying required Flatpak overrides."
-# flatpak override --user --nosocket=wayland com.nvidia.geforcenow
-# flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 # Provide SSL certs from the host. If I uncomment the following override, then the line that contains 'cp -r /etc/ssl /run/host/etc/'  might not be required, but I'm tired of testing so... if it ain't broken...
 # flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
 echo "✅ Not required in this step for Batocera as we'll do it later"
@@ -61,8 +61,8 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 # and provides the necessary SSL certificates to prevent network errors.
 
 # Creating the required flatpak overrides before launching the app. Otherwise the app won't launch on Batocera's MATE or XCFE Desktop
-flatpak override --user --nosocket=wayland com.nvidia.geforcenow
-flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+# flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+# flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 
 # Run the flatpak command with the required setup
 flatpak run --user --command=bash com.nvidia.geforcenow -c '
