@@ -15,22 +15,24 @@ REQUIRED_FILE="/userdata/system/pro/steam/conty.sh"
 # Check if the file doesn't exist or is not executable
 if [ ! -x "$REQUIRED_FILE" ]; then
     {
-        echo "🛑 IMPORTANT 🛑"
-        echo "You must have profork installed in your Batocera, as well as one Desktop from Multi-App Arch Container"
+        echo "⚠️ ERROR: The installer won't be executed ⚠️"
+        echo ""
+        echo "You must have Profork installed in your Batocera"
         echo ""
         echo "Instructions on how to install batocera.pro fork (profork) are at https://github.com/profork/profork"
         echo ""
-        echo "Once profork is executed, select the option 'Install Multi-App Arch Container' and click OK"
+        echo "Once profork is installed you'll need to run it"
         echo ""
-        echo "Then select the option 'Install/Update Arch Container' and click OK"
+        echo "Select the option 'Install Multi-App Arch Container' and click OK"
         echo ""
-        echo "And finally you need to select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
+        echo "And then select the option 'Addon: XCFE/MATE/LXDE DESKTOP Mode' and click OK"
         echo ""
+        echo "Once done this installer should no longer fail"
     } >&2 #<-- Redirect the entire block to stderr
     exit 1
 fi
 
-echo "Now it's time for the GeForce NOW installer to do the magic!"
+echo "It's time for the GeForce NOW installer to do the magic!"
 
 # Define the URL and the destination path
 DOWNLOAD_URL="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/gfn-install-core-v2.sh"
