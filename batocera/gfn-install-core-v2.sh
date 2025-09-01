@@ -42,10 +42,10 @@ echo "✅ GeForce NOW installed."
 echo ""
 echo "4. Applying required Flatpak overrides for Batocera..."
 # These settings are persistent and only need to be run once.
-flatpak override --user --nosocket=wayland com.nvidia.geforcenow
-flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+#flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+#flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 # Provide read-only access to host SSL certificates, the correct and efficient method.
-flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
+#flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
 echo "✅ Overrides applied."
 echo ""
 echo "5. Creating the custom launcher script..."
@@ -59,6 +59,9 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 
 # GeForce NOW SteamOS Spoof Script
 # This script runs GeForce NOW with SteamOS /etc/os-release information.
+
+flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 
 # Run the flatpak command with the required setup.
 flatpak run --user --command=bash com.nvidia.geforcenow -c '
@@ -86,7 +89,8 @@ VERSION_ID=3.7.13
 BUILD_ID=20250630.1
 STEAMOS_DEFAULT_UPDATE_BRANCH=stable
 EOL
-
+    # Recursively copy the host system'\''s SSL certificates into the sandbox
+    cp -r /etc/ssl /run/host/etc/
     # Launch GeForce NOW (SSL certs are now handled by the flatpak override).
     /app/bin/GeForceNOW
 '
