@@ -42,10 +42,10 @@ echo "✅ GeForce NOW installed."
 echo ""
 echo "4. Applying required Flatpak overrides for Batocera..."
 # These settings are persistent and only need to be run once.
-#flatpak override --user --nosocket=wayland com.nvidia.geforcenow
-#flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 # Provide read-only access to host SSL certificates, the correct and efficient method.
-#flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
+# flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
 echo "✅ Overrides applied."
 echo ""
 echo "5. Creating the custom launcher script..."
@@ -60,8 +60,8 @@ cat > "$LAUNCHER_SCRIPT_PATH" << 'EOF'
 # GeForce NOW SteamOS Spoof Script
 # This script runs GeForce NOW with SteamOS /etc/os-release information.
 
-flatpak override --user --nosocket=wayland com.nvidia.geforcenow
-flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
+# flatpak override --user --nosocket=wayland com.nvidia.geforcenow
+# flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
 
 # Run the flatpak command with the required setup.
 flatpak run --user --command=bash com.nvidia.geforcenow -c '
@@ -189,22 +189,22 @@ echo ""
 done
 
 echo "Creating EmulationStation system configuration..."
-cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
+cat > "/userdata/system/configs/emulationstation/es_systems_cloudgaming.cfg" << 'EOF'
 <?xml version="1.0"?>
 <systemList>
   <system>
-    <fullname>GeForce NOW</fullname>
-    <name>geforcenow</name>
+    <fullname>Cloud Gaming</fullname>
+    <name>cloudgaming</name>
     <manufacturer>NVIDIA</manufacturer>
     <release>2025</release>
     <hardware>port</hardware>
-    <path>/userdata/roms/geforcenow</path>
+    <path>/userdata/roms/cloudgaming</path>
     <extension>.sh .SH</extension>
     <command>%ROM%</command>
     <platform>pc</platform>
-    <theme>geforcenow</theme>
+    <theme>cloudgaming</theme>
     <emulators>
-      <emulator name="geforcenow">
+      <emulator name="cloudgaming">
         <cores>
           <core default="true">heroic2</core>
         </cores>
@@ -214,8 +214,8 @@ cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
 </systemList>
 EOF
 echo "Setting up everything to have the launch script in the main menu..."
-mkdir -p /userdata/roms/geforcenow
-cat > "/userdata/roms/geforcenow/Official GeForce NOW App.sh" << 'EOF'
+mkdir -p /userdata/roms/cloudgaming
+cat > "/userdata/roms/cloudgaming/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
 # Path to conty runner
@@ -241,19 +241,19 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
 bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 
-chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
+chmod +x "/userdata/roms/cloudgaming/Official GeForce NOW App.sh"
 
 echo "Cloning theme for main menu integration..."
-cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
+cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-cloudgaming
 echo ""
 
 # Define theme directory and required image assets.
 THEME_DIR="/userdata/themes/es-theme-carbon-gfn"
 declare -A files=(
-    ["$THEME_DIR/art/logos/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png"
-    ["$THEME_DIR/art/background/geforcenow.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg"
-    ["$THEME_DIR/art/controllers/geforcenow.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg"
-    ["$THEME_DIR/art/consoles/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png"
+    ["$THEME_DIR/art/logos/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/cloudgaming.png"
+    ["$THEME_DIR/art/background/cloudgaming.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/cloudgaming.jpg"
+    ["$THEME_DIR/art/controllers/cloudgaming.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/cloudgaming.svg"
+    ["$THEME_DIR/art/consoles/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/cloudgaming.png"
 )
 
 echo "Downloading theme assets..."
@@ -271,7 +271,7 @@ for dest in "${!files[@]}"; do
 done
 echo ""
 echo "ℹ️ If you already installed Amazon Luna or Xcloud we added a symlink in Cloud Gaming."
-ln -sf /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/geforcenow/
+ln -sf /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/cloudgaming/
 echo ""
 echo "✅ Go to settings / User Interfaces and select the theme 'ES-THEME-CARBON-GFN'."
 echo ""
