@@ -270,8 +270,8 @@ for dest in "${!files[@]}"; do
     fi
 done
 echo ""
-echo "ℹ️ If you installed Amazon Luna or Xcloud we just made a symlinks of those apps from Ports to Cloud Gaming."
-ln -sf /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/geforcenow/ || true
+echo "ℹ️ If you already installed Amazon Luna or Xcloud we added a symlink in Cloud Gaming."
+ln -sf /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/geforcenow/
 echo ""
 echo "✅ Go to settings / User Interfaces and select the theme 'ES-THEME-CARBON-GFN'."
 echo ""
