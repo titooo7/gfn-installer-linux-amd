@@ -216,6 +216,8 @@ cat > "/userdata/roms/geforcenow/Official GeForce NOW App.sh" << 'EOF'
 
 # Path to conty runner
 conty=/userdata/system/pro/steam/conty.sh
+batocera-mouse show
+
 DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh"
 
 # Execute the launcher inside the appropriate container environment.
