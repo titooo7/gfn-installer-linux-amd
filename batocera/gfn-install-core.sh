@@ -209,22 +209,22 @@ done
 # TODO: TRYING TO LAUNCH IT DIRECTLY FROM THE MAIN MENU ICON
 # WITH ALL THE CODE LISTED BELOW IT ADDS THE ENTRY TO THE MAIN MENU, BUT UPON CLICKING ON IT OT OPENS A WINDOW WHERE THE SCRIPT IS LOCATED
 # THE DESIRED OUTCOME IS TO LAUNCH GFN DIRECTLY, WITHOUT OPENING ANOTHER WINDOW SHOWING THE SCRIPT FILE
-cat > "/userdata/system/configs/emulationstation/es_systems_gfn.cfg" << 'EOF'
+cat > "/userdata/system/configs/emulationstation/es_systems_cloudgaming.cfg" << 'EOF'
 <?xml version="1.0"?>
 <systemList>
   <system>
-    <fullname>GeForce NOW</fullname>
-    <name>geforcenow</name>
-    <manufacturer>NVIDIA</manufacturer>
+    <fullname>Cloud Gaming/fullname>
+    <name>cloudgaming</name>
+    <manufacturer> </manufacturer>
     <release>2025</release>
     <hardware>port</hardware>
-    <path>/userdata/roms/geforcenow</path>
+    <path>/userdata/roms/cloudgaming</path>
     <extension>.sh .SH</extension>
     <command>sh %ROM%</command>
     <platform>pc</platform>
-    <theme>geforcenow</theme>
+    <theme>cloudgaming</theme>
     <emulators>
-      <emulator name="geforcenow">
+      <emulator name="cloudgaming">
         <cores>
           <core default="true">heroic2</core>
         </cores>
@@ -239,9 +239,9 @@ EOF
 # The next lines are the ones required to copy the launch script to the location related to the main menu. That way when we click on GeForce NOW it will show a geforce now script. 
 # Remember that the goal is to click on the menu and launch GeForce NOW and not to show a list of sh scripts
 # But since we cant do that yet then lets add a script there so geforce now can be launched...
-mkdir -p /userdata/roms/geforcenow
+mkdir -p /userdata/roms/cloudgaming
 # 
-cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/geforcenow/"
+cp "/userdata/roms/ports/Official GeForce NOW App.sh" "/userdata/roms/cloudgaming/"
 #
 # The last lines are just to download the images and logos for the Geforce Now entry in ES-DE main menu
 echo "Downloading images for GeForce NOW entry in ES-DE main menu"
@@ -251,16 +251,16 @@ echo "Downloading images for GeForce NOW entry in ES-DE main menu"
 # Download images to the persistent directories
 
 echo "Creating a clone/mod of es-theme-carbon theme, so we can have GeForce NOW in the main menu"
-cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-gfn
+cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-cloudgaming
 echo ""
 # Define the persistent theme directory
-THEME_DIR="/userdata/themes/es-theme-carbon-gfn"
+THEME_DIR="/userdata/themes/es-theme-carbon-cloudgaming"
 # Define target directories and URLs
 declare -A files=(
-    ["$THEME_DIR/art/logos/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/geforcenow.png"
-    ["$THEME_DIR/art/background/geforcenow.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/geforcenow.jpg"
-    ["$THEME_DIR/art/controllers/geforcenow.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/geforcenow.svg"
-    ["$THEME_DIR/art/consoles/geforcenow.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/geforcenow.png"
+    ["$THEME_DIR/art/logos/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/cloudgaming.png"
+    ["$THEME_DIR/art/background/cloudgaming.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/cloudgaming.jpg"
+    ["$THEME_DIR/art/controllers/cloudgaming.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/cloudgaming.svg"
+    ["$THEME_DIR/art/consoles/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/cloudgaming.png"
 )
 
 # Loop through the files, create directories, and download
@@ -284,8 +284,8 @@ for dest in "${!files[@]}"; do
     fi
 done
 
-echo "✅ You can now select ES-THEME-CARBON-GFN in the User Interface Settings"
+echo "✅ You can now select ES-THEME-carbon-cloudgaming in the User Interface Settings"
 # We give permission to the script that should be used in the main menu
-chmod +x "/userdata/roms/geforcenow/Official GeForce NOW App.sh"
+chmod +x "/userdata/roms/cloudgaming/Official GeForce NOW App.sh"
 echo ""
 echo "🎉 Installation complete! Now you can launch the Official GeForce NOW App from Batocera's main menu (ES-DE)"
