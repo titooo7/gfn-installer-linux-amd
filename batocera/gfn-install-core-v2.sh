@@ -195,7 +195,7 @@ cat > "/userdata/system/configs/emulationstation/es_systems_cloudgaming.cfg" << 
   <system>
     <fullname>Cloud Gaming</fullname>
     <name>cloudgaming</name>
-    <manufacturer>NVIDIA</manufacturer>
+    <manufacturer> </manufacturer>
     <release>2025</release>
     <hardware>port</hardware>
     <path>/userdata/roms/cloudgaming</path>
