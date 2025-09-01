@@ -269,7 +269,8 @@ for dest in "${!files[@]}"; do
         echo "🚨 Error: Failed to download from $url"
     fi
 done
-
+echo "If you installed Amazon Luna or Xcloud we just made a symlinks of those apps from Ports to Cloud Gaming."
+ln -s /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/geforcenow/
 echo ""
 echo "✅ Go to settings / User Interfaces and select the theme 'ES-THEME-CARBON-GFN'."
 echo ""
