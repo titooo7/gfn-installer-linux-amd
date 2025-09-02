@@ -48,11 +48,8 @@ fi
 # Make the downloaded script executable
 chmod +x "$INSTALLER_SCRIPT_TO_RUN"
 
-# Define the path to conty
-conty=/userdata/system/pro/steam/conty.sh
-
-# Execute the script inside the container using MATE's fish shell
-"$conty" \
+# Execute the installer script inside the Arch Multi-App container
+"$REQUIRED_FILE" \
         --bind /userdata/system/containers/storage /var/lib/containers/storage \
         --bind /userdata/system/flatpak /var/lib/flatpak \
         --bind /userdata/system/etc/passwd /etc/passwd \
