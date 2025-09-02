@@ -151,11 +151,11 @@ echo ""
 while true; do
     read -p "Do you want to proceed? (Y/n): " response < /dev/tty
     response_lower=$(echo "$response" | tr '[:upper:]' '[:lower:]')
-    
+
     if [[ "$response_lower" =~ ^(n|no)$ ]]; then
-        echo "👍 Skipping main menu entry. Adding  section"
+        echo "👍 Skipping main menu entry. Adding section"
         echo "8. Creating a GeForce NOW shortcut in the Ports section in EmulationStation..."
-cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
+        cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
 
 # Path to conty runner
@@ -164,25 +164,26 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
 
 # Execute the launcher inside the appropriate container environment.
 "$conty" \
-        --bind /userdata/system/containers/storage /var/lib/containers/storage \
-        --bind /userdata/system/flatpak /var/lib/flatpak \
-        --bind /userdata/system/etc/passwd /etc/passwd \
-        --bind /userdata/system/etc/group /etc/group \
-        --bind /userdata/system /home/batocera \
-        --bind /sys/fs/cgroup /sys/fs/cgroup \
-        --bind /userdata/system /home/root \
-        --bind /etc/fonts /etc/fonts \
-        --bind /userdata /userdata \
-        --bind /newroot /newroot \
-        --bind / /batocera \
+--bind /userdata/system/containers/storage /var/lib/containers/storage \
+--bind /userdata/system/flatpak /var/lib/flatpak \
+--bind /userdata/system/etc/passwd /etc/passwd \
+--bind /userdata/system/etc/group /etc/group \
+--bind /userdata/system /home/batocera \
+--bind /sys/fs/cgroup /sys/fs/cgroup \
+--bind /userdata/system /home/root \
+--bind /etc/fonts /etc/fonts \
+--bind /userdata /userdata \
+--bind /newroot /newroot \
+--bind / /batocera \
 bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
-echo "✅ Shortcut for GeForce NOW created in the Ports section"
-echo ""
-echo "🎉 You can now launch GeForce NOW from Ports (Batocera's main menu)."
-echo "Alternatively you can press F1 from the main menu, run LXDE/MATE/XFCE desktops and launch it from there."
-
-echo ""
+        echo "✅ Shortcut for GeForce NOW created in the Ports section"
+        echo ""
+        echo "🎉 You can now launch GeForce NOW from Ports (Batocera's main menu)."
+        # Remove the installer script
+        rm "/userdata/system/gfn-install-core.sh"
+        echo "Alternatively you can press F1 from the main menu, run LXDE/MATE/XFCE desktops and launch it from there."
+        echo ""
         exit 0
     elif [[ -z "$response" || "$response_lower" =~ ^(y|yes)$ ]]; then
         echo "👍 OK, creating the main menu entry..."
