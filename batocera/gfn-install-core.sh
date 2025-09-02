@@ -180,6 +180,7 @@ EOF
         echo "✅ Shortcut for GeForce NOW created in the Ports section"
         echo ""
         echo "🎉 You can now launch GeForce NOW from Ports (Batocera's main menu)."
+        echo ""
         # Remove the installer script
         rm "/userdata/system/gfn-install-core.sh"
         echo "Alternatively you can press F1 from the main menu, run LXDE/MATE/XFCE desktops and launch it from there."
@@ -219,7 +220,7 @@ cat > "/userdata/system/configs/emulationstation/es_systems_cloudgaming.cfg" << 
   </system>
 </systemList>
 EOF
-echo "Adding the GeForce NOW script to 'Cloud Gaming' in the main menu..."
+echo "Adding the GeForce NOW script to 'Cloud Gaming'..."
 mkdir -p /userdata/roms/cloudgaming
 cat > "/userdata/roms/cloudgaming/Official GeForce NOW App.sh" << 'EOF'
 #!/bin/bash
@@ -247,8 +248,8 @@ bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 
 chmod +x "/userdata/roms/cloudgaming/Official GeForce NOW App.sh"
-
-echo "Creating the ES-THEME-CARBON-CLOUDGAMING theme for main menu integration..."
+echo ""
+echo "Creating ES-THEME-CARBON-CLOUDGAMING theme for main menu integration..."
 cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-cloudgaming
 echo ""
 
