@@ -139,10 +139,13 @@ echo ""
 
 # --- Optional: Create Main Menu Entry ---
 echo "------------------------------------------------------------------"
-echo "🛑 Would you like to create a dedicated Cloud Gaming in Batocera's main menu?"
+echo "⚠️ Would you like to create a Cloud Gaming entry in Batocera's main menu? ⚠️"
+echo ""
 echo "This requires copying a theme and will use approximately 170MB of space."
 echo ""
-
+echo "If you don't want that, you will have to launch the app from 'Ports' section instead"
+echo ""
+echo "You will be asked twice to confirm your choice."
 # Read user input with validation.
 while true; do
     read -p "Do you want to proceed? (Y/n): " response < /dev/tty
