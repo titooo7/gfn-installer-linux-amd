@@ -62,3 +62,6 @@ chmod +x "$INSTALLER_SCRIPT_TO_RUN"
         --bind /newroot /newroot \
         --bind / /batocera \
 bash -c "$INSTALLER_SCRIPT_TO_RUN"
+# Delete the downloaded script after it has been executed
+rm "$INSTALLER_SCRIPT_TO_RUN"
+echo "✅ Installation complete. The installer script has been removed."
