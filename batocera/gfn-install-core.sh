@@ -44,7 +44,7 @@ echo "4. Applying required Flatpak overrides for Batocera..."
 # These settings are persistent and only need to be run once.
 flatpak override --user --nosocket=wayland com.nvidia.geforcenow
 flatpak override --user --nofilesystem=host-etc com.nvidia.geforcenow
-# Provide read-only access to host SSL certificates, the correct and efficient method.
+# Provide read-only access to host SSL certificates. In theory this would be correct and efficient method but when I did the SSL thing here isntead of  doing it in step 5, it just didn't work therefore I comment it so it doesn't get executed.
 # flatpak override --user --filesystem=/etc/ssl/certs:ro com.nvidia.geforcenow
 echo "✅ Overrides applied."
 echo ""
@@ -254,7 +254,6 @@ echo ""
 # Define theme directory and required image assets.
 THEME_DIR="/userdata/themes/es-theme-carbon-cloudgaming"
 declare -A files=(
-    #For now we won't insert any log and we'll just keep the word  cloud gaming there
     ["$THEME_DIR/art/logos/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/logos/cloudgaming.png"
     ["$THEME_DIR/art/background/cloudgaming.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/cloudgaming.jpg"
     ["$THEME_DIR/art/controllers/cloudgaming.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/cloudgaming.svg"
