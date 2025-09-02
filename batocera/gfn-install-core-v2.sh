@@ -164,7 +164,6 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
         --bind /userdata/system/flatpak /var/lib/flatpak \
         --bind /userdata/system/etc/passwd /etc/passwd \
         --bind /userdata/system/etc/group /etc/group \
-        --bind /var/run/nvidia /run/nvidia \
         --bind /userdata/system /home/batocera \
         --bind /sys/fs/cgroup /sys/fs/cgroup \
         --bind /userdata/system /home/root \
@@ -232,7 +231,6 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
         --bind /userdata/system/flatpak /var/lib/flatpak \
         --bind /userdata/system/etc/passwd /etc/passwd \
         --bind /userdata/system/etc/group /etc/group \
-        --bind /var/run/nvidia /run/nvidia \
         --bind /userdata/system /home/batocera \
         --bind /sys/fs/cgroup /sys/fs/cgroup \
         --bind /userdata/system /home/root \
@@ -273,7 +271,12 @@ for dest in "${!files[@]}"; do
 done
 echo ""
 echo "ℹ️ If you already installed Amazon Luna or Xcloud we added a symlink in Cloud Gaming."
-ln -sf /userdata/roms/ports/xcloud.sh /userdata/roms/ports/AmazonLuna.sh /userdata/roms/cloudgaming/
+if [ -f "/userdata/roms/ports/xcloud.sh" ]; then
+    ln -sf "/userdata/roms/ports/xcloud.sh" "/userdata/roms/cloudgaming/"
+fi
+if [ -f "/userdata/roms/ports/AmazonLuna.sh" ]; then
+    ln -sf "/userdata/roms/ports/AmazonLuna.sh" "/userdata/roms/cloudgaming/"
+fi
 echo ""
 echo "✅ Go to Gettings / User Interfaces and select the theme 'ES-THEME-CARBON-CLOUDGAMING'."
 echo ""
