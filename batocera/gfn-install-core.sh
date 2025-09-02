@@ -254,7 +254,8 @@ echo ""
 # Define theme directory and required image assets.
 THEME_DIR="/userdata/themes/es-theme-carbon-cloudgaming"
 declare -A files=(
-    ["$THEME_DIR/art/logos/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/menu/cloudgaming.png"
+    #For now we won't insert any log and we'll just keep the word  cloud gaming there
+    ["$THEME_DIR/art/logos/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/logos/cloudgaming.png"
     ["$THEME_DIR/art/background/cloudgaming.jpg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/background/cloudgaming.jpg"
     ["$THEME_DIR/art/controllers/cloudgaming.svg"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/controllers/cloudgaming.svg"
     ["$THEME_DIR/art/consoles/cloudgaming.png"]="https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/img/consoles/cloudgaming.png"
