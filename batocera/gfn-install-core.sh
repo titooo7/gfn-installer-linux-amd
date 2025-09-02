@@ -155,7 +155,7 @@ while true; do
     if [[ "$response_lower" =~ ^(n|no)$ ]]; then
         echo "👍 Skipping main menu entry. Adding section"
         echo "8. Creating a GeForce NOW shortcut in the Ports section in EmulationStation..."
-        cat > "/userdata/roms/ports/Official GeForce NOW App.sh" << 'EOF'
+        cat > "/userdata/roms/ports/GeForce NOW (Official App).sh" << 'EOF'
 #!/bin/bash
 
 # Path to conty runner
@@ -222,7 +222,7 @@ cat > "/userdata/system/configs/emulationstation/es_systems_cloudgaming.cfg" << 
 EOF
 echo "Adding the GeForce NOW script to 'Cloud Gaming'..."
 mkdir -p /userdata/roms/cloudgaming
-cat > "/userdata/roms/cloudgaming/Official GeForce NOW App.sh" << 'EOF'
+cat > "/userdata/roms/cloudgaming/GeForce NOW (Official App).sh" << 'EOF'
 #!/bin/bash
 
 # Path to conty runner
@@ -247,7 +247,7 @@ DIRECT_LAUNCHER_SCRIPT_PATH="/userdata/system/.local/bin/geforce-now-launcher.sh
 bash -c "$DIRECT_LAUNCHER_SCRIPT_PATH"
 EOF
 
-chmod +x "/userdata/roms/cloudgaming/Official GeForce NOW App.sh"
+chmod +x "/userdata/roms/cloudgaming/GeForce NOW (Official App).sh"
 echo ""
 echo "Creating ES-THEME-CARBON-CLOUDGAMING theme for main menu integration..."
 cp -r /batocera/usr/share/emulationstation/themes/es-theme-carbon /userdata/themes/es-theme-carbon-cloudgaming
