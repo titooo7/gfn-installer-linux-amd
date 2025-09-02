@@ -285,4 +285,5 @@ echo ""
 echo "✅ Go to Gettings / User Interfaces and select the theme 'ES-THEME-CARBON-CLOUDGAMING'."
 echo ""
 echo "🎉 You can go to Cloud Gaming in Batocera's main menu and launch GeForce NOW."
-
+# Remove the installer script
+rm "/userdata/system/gfn-install-core.sh"
