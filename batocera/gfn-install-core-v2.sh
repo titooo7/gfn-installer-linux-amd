@@ -146,6 +146,7 @@ echo ""
 echo "If you don't want that, you will have to launch the app from 'Ports' section instead"
 echo ""
 echo "You will be asked twice to confirm your choice."
+echo ""
 # Read user input with validation.
 while true; do
     read -p "Do you want to proceed? (Y/n): " response < /dev/tty
