@@ -67,7 +67,11 @@ Open a Terminal app and copy and paste the following command:
 
 ```bash
 curl -sL -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh
+```
+```
 chmod +x install-gfn.sh
+```
+```
 ./install-gfn.sh
 ```
 
