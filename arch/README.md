@@ -66,18 +66,11 @@ Successfully tested on a system with the following specifications, which confirm
 Open a Terminal app and copy and paste the following command:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh | bash
+curl -sL -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh
+chmod +x install-gfn.sh
+./install-gfn.sh
 ```
 
------
-
-## Installation for BATOCERA
-
-Connect to your Batocera via SSH or launch a Terminal app in Batocera, then copy and paste the following command:
-
-```bash
-curl -sL https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/batocera/run-gfn-installer-for-batocera.sh | bash
-```
 
 -----
 ## Uninstallation (CachyOS)
