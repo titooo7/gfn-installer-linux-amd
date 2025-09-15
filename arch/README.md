@@ -63,14 +63,18 @@ Successfully tested on a system with the following specifications, which confirm
 
 ## Installation for CachyOS
 
-Open a Terminal app and copy and paste the following command:
-
+Open a Terminal app and copy and paste the following commands...
+1- Download the script:
 ```bash
 curl -sL -o install-gfn.sh https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/install-gfn.sh
+
 ```
+2-Give it executable permissions;
 ```
 chmod +x install-gfn.sh
 ```
+3-Execute it:
+
 ```
 ./install-gfn.sh
 ```
