@@ -98,6 +98,10 @@ rm -f "$HOME/.local/share/applications/com.nvidia.geforcenow.desktop"
 
 # Remove the desktop shortcut
 rm -f "$HOME/Desktop/com.nvidia.geforcenow.desktop"
+
+# Remove the sudoers file we created
+sudo rm -r /etc/sudoers.d/99-geforcenow-spoof
+
 ```
 
 -----
