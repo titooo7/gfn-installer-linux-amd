@@ -49,7 +49,7 @@ echo "✅ GeForce NOW repo added"
 
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
-flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
+flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || echo "✅ App installed. In the next steps we'll apply some custom tweaks so it can work."
 # We are also downloading the logo because for some reason our installer doens't and otherwise the icon of the app will be blank in the menu and desktop
 mkdir -p "$HOME/.local/share/icons/hicolor/512x512/apps"
 curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
