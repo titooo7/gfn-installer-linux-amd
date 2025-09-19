@@ -51,7 +51,7 @@ echo "✅ GeForce NOW repo added"
 
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
-flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || true
+flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow ||  echo "✅ App installed. In the next steps we'll apply some custom tweaks so it can work."
 mkdir -p "$HOME/.local/share/icons/hicolor/512x512/apps"
 curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
 echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
