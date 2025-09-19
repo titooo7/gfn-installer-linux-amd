@@ -121,11 +121,16 @@ cleanup() {
 trap cleanup EXIT
 
 # --- Step 1: Perform DMI Spoofing on the host system ---
-echo "🚀 Applying DMI spoof to mimic a Steam Deck..."
-echo "Jupiter" > /tmp/fake_product_name
-echo "Valve" > /tmp/fake_sys_vendor
-echo "Valve" > /tmp/fake_board_vendor
-echo "Jupiter" > /tmp/fake_board_name
+#echo "🚀 Applying DMI spoof to mimic a Steam Deck..."
+#echo "Jupiter" > /tmp/fake_product_name
+#echo "Valve" > /tmp/fake_sys_vendor
+#echo "Valve" > /tmp/fake_board_vendor
+#echo "Jupiter" > /tmp/fake_board_name
+echo "🚀 Applying DMI spoof to mimic a Lenovo Legion GO S..."
+echo "83E1" > /tmp/fake_product_name
+echo "Lenovo" > /tmp/fake_sys_vendor
+echo "Lenovo" > /tmp/fake_board_vendor
+echo "8APU1" > /tmp/fake_board_name
 
 # Use sudo for the mount commands (passwordless due to sudoers config)
 sudo mount --bind /tmp/fake_product_name /sys/class/dmi/id/product_name
