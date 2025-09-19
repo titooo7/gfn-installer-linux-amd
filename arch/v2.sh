@@ -64,7 +64,8 @@ echo "✅ Flatpak overrides applied"
 echo "5. Configuring passwordless sudo for automatic system value spoofing..."
 echo "   This step allows the launcher to mount/umount system values without asking for a password every time."
 echo "   It will create a file at '$SUDOERS_FILE' to grant permissions for ONLY the required commands."
-echo "   THIS WILL SPOOF YOUR DEVICE PRODUCT, VENDOR AND BOARD WHILE YOU HAVE GFN OPEN."
+echo "   This is only required if you want to have upto 4K 120FPS rather than just 4K 90FP."
+echo "   THIS WILL SPOOF YOUR DEVICE PRODUCT, VENDOR AND BOARD WHILE GEFORCE NOW IS RUNNING."
 echo "   I DO NOT RECOMMEND TO PERFORM ANY UPDATES TO YOUR OS WHILE GFN IS OPEN. DO IT AT YOUR OWN RISK."
 read -p "   Do you want to proceed? (y/N) " -n 1 -r
 echo # Move to a new line
