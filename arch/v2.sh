@@ -51,7 +51,7 @@ echo "✅ GeForce NOW repo added"
 
 echo "3. Installing GeForce NOW..."
 flatpak uninstall --noninteractive -y --user com.nvidia.geforcenow &>/dev/null || echo "✅ GeForce NOW not found. Ready for a fresh installation."
-flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow ||  echo "✅ App installed. In the next steps we'll apply some custom tweaks so it can work."
+flatpak install --noninteractive -y --user GeForceNOW com.nvidia.geforcenow || echo "✅ App installed. In the next steps we'll apply some custom tweaks so it can work."
 mkdir -p "$HOME/.local/share/icons/hicolor/512x512/apps"
 curl -sL -o "$HOME/.local/share/icons/hicolor/512x512/apps/com.nvidia.geforcenow.png" https://raw.githubusercontent.com/titooo7/gfn-installer-linux-amd/main/arch/img/com.nvidia.geforcenow.png
 echo "✅ GeForce NOW installed. Tweaking few things so it can launch succesfully..."
@@ -62,11 +62,15 @@ echo "✅ Flatpak overrides applied"
 
 # --- NEW STEP: Configure passwordless sudo for the mounting commands ---
 echo "5. Configuring passwordless sudo for automatic system value spoofing..."
-echo "   This step allows the launcher to mount/umount system values without asking for a password every time."
-echo "   It will create a file at '$SUDOERS_FILE' to grant permissions for ONLY the required commands."
-echo "   This is only required if you want to have upto 4K 120FPS rather than just 4K 90FP."
-echo "   THIS WILL SPOOF YOUR DEVICE PRODUCT, VENDOR AND BOARD WHILE GEFORCE NOW IS RUNNING."
-echo "   I DO NOT RECOMMEND TO PERFORM ANY UPDATES TO YOUR OS WHILE GFN IS OPEN. DO IT AT YOUR OWN RISK."
+echo ""
+echo "   This next step is optional, but required if you want to enable up to 4K 120FPS streaming."
+echo "   If you agree, your device's system information (product, vendor, and board name) will be temporarily"
+echo "   'spoofed' or disguised to look like a different device while GeForce NOW is running."
+echo ""
+echo "   ⚠️ IMPORTANT: Because of this temporary change, it is strongly recommended NOT to perform"
+echo "   any system or software updates while GeForce NOW is open."
+echo "   Proceed at your own risk."
+echo ""
 read -p "   Do you want to proceed? (y/N) " -n 1 -r
 echo # Move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
