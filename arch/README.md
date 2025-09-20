@@ -12,7 +12,7 @@ This script automates the installation and applies the necessary configurations 
 
   * **Enables GeForce NOW on Unsupported Systems:** NVIDIA’s official Linux support is currently limited to ChromeOS and the Steam Deck. This script installs the official Steam Deck application of GeForce NOW and creates a custom launcher with the required arguments to bypass these restrictions.
 
-  * **Supports High-Resolution Streaming:** Enables GeForce NOW Ultimate subscribers to stream not just at 1440p 120FPS, but also up to 4K 90FPS, provided their AMD GPU and display are capable.
+  * **Supports High-Resolution Streaming:** Enables GeForce NOW Ultimate subscribers to stream not just at 1440p 120FPS, but also up to 4K 120FPS, provided their AMD GPU and display are capable.
 
   * **Minimal and Safe:** The script installs the official GeForce NOW application via Flatpak. The only addition is a lightweight launcher script to apply necessary settings, without modifying core system files.
 
@@ -53,7 +53,7 @@ The installer performs the following steps:
 
 ### Tested Hardware
 
-Successfully tested on a system with the following specifications, which confirmed upto 4K 90FPS streaming capability on 1080p monitor and a 4K TV.
+Successfully tested on a system with the following specifications, which confirmed upto 4K 120FPS streaming capability on 1080p monitor and a 4K TV.
 
   * **Device:** Chuwi Aubox mini-pc running CachyOS
   * **CPU:** AMD Ryzen 7 8845HS
@@ -103,11 +103,6 @@ rm -f "$HOME/Desktop/com.nvidia.geforcenow.desktop"
 sudo rm -r /etc/sudoers.d/99-geforcenow-spoof
 
 ```
-
------
-## Uninstallation (Batocera)
-
-To remove the application and all related files created by this script, execute the following commands in your terminal:
 
 -----
 
