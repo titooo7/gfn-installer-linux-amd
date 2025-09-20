@@ -2,7 +2,7 @@
 
 # Unofficial GeForce NOW Installer for AMD on Linux 🌩️🎮
 
-An automated installer script to **configure the official NVIDIA GeForce NOW** application for use on Arch-based Linux distributions with AMD graphics cards.
+An automated installer script to **configure the official NVIDIA GeForce NOW application** for use on Arch-based Linux distributions with AMD graphics cards.
 
 This script automates the installation and applies the necessary configurations enabling the official GeForce NOW app to run on hardware and Linux software that is not officially supported by NVIDIA.
 
